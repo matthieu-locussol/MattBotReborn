@@ -1,0 +1,29 @@
+{
+   "name": "mattbotreborn",
+   "version": "1.0.0",
+   "description": "A multipurpose Discord bot written using Typescript.",
+   "repository": "https://github.com/matthieu-locussol/MattBotReborn",
+   "author": "Matthieu Locussol",
+   "license": "MIT",
+   "scripts": {
+      "dev": "cross-env NODE_ENV=development ts-node-dev --respawn --transpile-only src/main.ts",
+      "build": "tsc",
+      "start": "cross-env NODE_ENV=production node build/main.js",
+      "check:prettier": "prettier --list-different --config ./.prettierrc.json --ignore-path .gitignore --write \"**/*.{js,jsx,ts,tsx,json}\"",
+      "check:eslint": "eslint --ignore-path .gitignore .",
+      "check:typescript": "tsc --project ./tsconfig.json --noEmit"
+   },
+   "dependencies": {
+      "discord.js": "^12.5.3"
+   },
+   "devDependencies": {
+      "@types/node": "^15.6.0",
+      "@typescript-eslint/eslint-plugin": "^4.24.0",
+      "@typescript-eslint/parser": "^4.24.0",
+      "cross-env": "^7.0.3",
+      "dotenv": "^10.0.0",
+      "eslint": "^7.27.0",
+      "ts-node-dev": "^1.1.6",
+      "typescript": "^4.2.4"
+   }
+}
