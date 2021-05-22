@@ -1,5 +1,20 @@
 # MattBotReborn
 
+## Installation on server
+
+```bash
+yarn install
+
+pm2 install pm2-logrotate
+
+# Maximum number of saved log files
+pm2 set pm2-logrotate:retain 30
+# Minimum size required to split a log file
+pm2 set pm2-logrotate:max_size 10M
+# At which interval the worker is checking the log's size
+pm2 set pm2-logrotate:workerInterval 300
+```
+
 ## Invite link
 
 [Invite production bot](https://discord.com/oauth2/authorize?client_id=845716376696913960&scope=bot&permissions=8)
