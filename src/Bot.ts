@@ -13,7 +13,7 @@ export class Bot {
 
    constructor() {
       this._client = new Client({
-         intents: [Intents.ALL],
+         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
       });
    }
 
