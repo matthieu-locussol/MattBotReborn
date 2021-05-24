@@ -2,7 +2,7 @@ import { Client, Intents } from 'discord.js';
 
 export const client = new Client({
    ws: {
-      intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+      intents: [Intents.ALL],
    },
 });
 
