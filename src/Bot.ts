@@ -1,12 +1,6 @@
 import { Client, Intents, ApplicationCommandData, CommandInteraction } from 'discord.js';
 import { Module } from './modules/Module';
 
-export type Command = {
-   name: string;
-   description: string;
-   fn: () => void;
-};
-
 export class Bot {
    private _client: Client;
    private _commands: ApplicationCommandData[] = [];
@@ -17,6 +11,10 @@ export class Bot {
       });
    }
 
+   /**
+    * This method allows you to add a module and all of its commands to the bot.
+    * @param module The module you want to add to the bot
+    */
    addModule(module: Module) {
       module.commands.forEach((command) => {
          this._commands.push(command.infos);
@@ -24,6 +22,17 @@ export class Bot {
       });
    }
 
+   /**
+    * This method is used to refresh the existing slash commands for a guild given its id.
+    *
+    * It first delete the old slash commands, then it creates every single command again.
+    *
+    * *It is especially useful when one needs to delete an existing slash command and should
+    * be called after the bot started up.*
+    * @param guildId The ID of the Guild you want to update the slash commands
+    * @see populateCommandsGeneral
+    * @see [See Discord documentation](https://discord.com/developers/docs/interactions/slash-commands#registering-a-command)
+    */
    async populateCommandsGuild(guildId: string) {
       const guild = await this._client.guilds.fetch(guildId);
 
@@ -46,6 +55,16 @@ export class Bot {
       });
    }
 
+   /**
+    * This method is used to refresh the existing global slash commands for the bot.
+    *
+    * It first delete the old global slash commands, then it creates every single command again.
+    *
+    * It is especially useful when one needs to delete an existing global slash command and should
+    * be called after the bot started up.
+    * @see populateCommandsGuild
+    * @see [See Discord documentation](https://discord.com/developers/docs/interactions/slash-commands#registering-a-command)
+    */
    populateCommandsGeneral() {
       this._client.on('message', async (msg) => {
          if (msg.content === '!POPULATE_GUILD' && msg.author.id === msg.guild.ownerID) {
@@ -66,7 +85,12 @@ export class Bot {
       });
    }
 
-   onCommand(name: string, fn: (command: CommandInteraction) => void) {
+   /**
+    * Listens for the slash command named `name` and fires the function `fn` when the command is called.
+    * @param name The name of the slash command (as defined in a Module)
+    * @param fn The function to execute when the slash command is called
+    */
+   private onCommand(name: string, fn: (command: CommandInteraction) => void) {
       this._client.on('interaction', (interaction) => {
          const userCommand = interaction;
 
@@ -78,6 +102,11 @@ export class Bot {
       });
    }
 
+   /**
+    *
+    * @param token The discord bot token
+    * @see [See Discord documentation](https://discord.com/developers/docs/topics/oauth2#bots)
+    */
    async run(token: string) {
       this._client.on('ready', () => {
          console.log(`Logged in as ${this._client.user.tag}!`);
