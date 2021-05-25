@@ -1,6 +1,8 @@
 import { Client, Intents, ApplicationCommandData, CommandInteraction } from 'discord.js';
-import type { Module } from './modules/Module';
-import { sentByOwner } from './utils/message';
+import { logger } from '../../client';
+import type { Module } from '../../modules/Module';
+import { sentByOwner } from '../../utils/message';
+import { permissionWrapper } from '../../utils/permissions';
 
 export class Bot {
    private _client: Client;
@@ -17,9 +19,13 @@ export class Bot {
     * @param module The module you want to add to the bot
     */
    addModule(module: Module) {
+      logger.log({ id: 'LOG_Add_Module', moduleName: module.name });
+
       module.commands.forEach((command) => {
+         logger.log({ id: 'LOG_Add_Module_Command', commandName: command.infos.name });
+
          this._commands.push(command.infos);
-         this.onCommand(command.infos.name, command.fn);
+         this.onCommand(command.infos.name, permissionWrapper(command.fn, module));
       });
    }
 
@@ -110,7 +116,7 @@ export class Bot {
     */
    async run(token: string) {
       this._client.on('ready', () => {
-         console.log(`Logged in as ${this._client.user.tag}!`);
+         logger.log({ id: 'LOG_Logged_In', tag: this._client.user.tag });
       });
 
       await this._client.login(token);
