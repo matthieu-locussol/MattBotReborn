@@ -44,7 +44,7 @@ export class Bot {
       const guild = await this._client.guilds.fetch(guildId);
 
       this._client.on('message', async (msg) => {
-         if (msg.content === '!POPULATE_GUILD' && sentByOwner(msg)) {
+         if (msg.content === '!POPULATE' && sentByOwner(msg)) {
             const commands = await guild.commands.fetch();
 
             await Promise.all(
@@ -74,7 +74,7 @@ export class Bot {
     */
    populateCommandsGeneral() {
       this._client.on('message', async (msg) => {
-         if (msg.content === '!POPULATE_GUILD' && sentByOwner(msg)) {
+         if (msg.content === '!POPULATE' && sentByOwner(msg)) {
             const commands = await this._client.application.commands.fetch();
 
             await Promise.all(
