@@ -1,7 +1,6 @@
-import { Module } from '../Module';
-import { CommandInteraction } from 'discord.js';
+import type { CommandFn, Module } from '../Module';
 
-const ping = (command: CommandInteraction) => {
+const ping: CommandFn = (command) => {
    command.reply('Pong !');
 };
 
