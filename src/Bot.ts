@@ -1,5 +1,6 @@
 import { Client, Intents, ApplicationCommandData, CommandInteraction } from 'discord.js';
-import { Module } from './modules/Module';
+import type { Module } from './modules/Module';
+import { sentByOwner } from './utils/message';
 
 export class Bot {
    private _client: Client;
@@ -37,7 +38,7 @@ export class Bot {
       const guild = await this._client.guilds.fetch(guildId);
 
       this._client.on('message', async (msg) => {
-         if (msg.content === '!POPULATE_GUILD' && msg.author.id === msg.guild.ownerID) {
+         if (msg.content === '!POPULATE_GUILD' && sentByOwner(msg)) {
             const commands = await guild.commands.fetch();
 
             await Promise.all(
@@ -67,7 +68,7 @@ export class Bot {
     */
    populateCommandsGeneral() {
       this._client.on('message', async (msg) => {
-         if (msg.content === '!POPULATE_GUILD' && msg.author.id === msg.guild.ownerID) {
+         if (msg.content === '!POPULATE_GUILD' && sentByOwner(msg)) {
             const commands = await this._client.application.commands.fetch();
 
             await Promise.all(
