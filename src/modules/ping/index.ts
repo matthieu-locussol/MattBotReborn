@@ -5,6 +5,7 @@ const ping: CommandFn = (command) => {
 };
 
 export const pingModule: Module = {
+   name: 'Ping',
    commands: [
       {
          infos: { name: 'ping', description: 'Ping the MattBot' },
