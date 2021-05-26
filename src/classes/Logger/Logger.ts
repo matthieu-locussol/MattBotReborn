@@ -77,6 +77,9 @@ export class Logger {
          case 'LOG_Module_Command_Duplicate': {
             return `Could not register command "${data.commandName}" for the module "${data.moduleName}": this command name already exists!`;
          }
+         case 'LOG_Unkown_Module_Command': {
+            return `Unknown command for module "${data.moduleName}"!`;
+         }
       }
    }
 }
