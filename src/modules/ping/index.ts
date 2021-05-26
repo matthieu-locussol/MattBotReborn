@@ -1,7 +1,7 @@
 import type { CommandFn, Module } from '../Module';
 
 const ping: CommandFn = (command) => {
-   command.reply(`Pong ! (${command.client.ws.ping} ms)`);
+   command.reply(`Pong! (${command.client.ws.ping} ms)`);
 };
 
 export const pingModule: Module = {
