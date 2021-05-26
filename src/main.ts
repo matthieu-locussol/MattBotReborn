@@ -1,12 +1,14 @@
 import * as dotenv from 'dotenv';
 import { resolve } from 'path';
 import { bot } from './client';
+import { osuModule } from './modules/osu';
 import { pingModule } from './modules/ping';
 
 dotenv.config({ path: resolve(__dirname, '../.env') });
 
 (async () => {
    bot.addModule(pingModule);
+   bot.addModule(osuModule);
 
    if (process.env.NODE_ENV === 'development') {
       await bot.run(process.env.DISCORD_TOKEN_DEVELOPMENT);
