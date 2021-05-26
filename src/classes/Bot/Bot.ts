@@ -29,8 +29,17 @@ export class Bot {
       module.commands.forEach((command) => {
          logger.log({ id: 'LOG_Add_Module_Command', commandName: command.infos.name });
 
-         this._commands.push(command.infos);
-         this.onCommand(command.infos.name, permissionWrapper(command.fn, module));
+         const index = this._commands.findIndex((c) => c.name === command.infos.name);
+         if (index === -1) {
+            this._commands.push(command.infos);
+            this.onCommand(command.infos.name, permissionWrapper(command.fn, module));
+         } else {
+            logger.error({
+               id: 'LOG_Module_Command_Duplicate',
+               moduleName: module.name,
+               commandName: command.infos.name,
+            });
+         }
       });
    }
 

@@ -11,6 +11,7 @@ export const LOG_WHITELIST_CHANNEL = 'LOG_Whitelist_Channel';
 export const LOG_BLACKLIST_CHANNEL = 'LOG_Blacklist_Channel';
 export const LOG_WHITELIST_USER = 'LOG_Whitelist_User';
 export const LOG_BLACKLIST_USER = 'LOG_Blacklist_User';
+export const LOG_MODULE_COMMAND_DUPLICATE = 'LOG_Module_Command_Duplicate';
 
 export type LogData =
    | {
@@ -77,4 +78,9 @@ export type LogData =
         moduleName: string;
         user: string;
         userId: string;
+     }
+   | {
+        id: typeof LOG_MODULE_COMMAND_DUPLICATE;
+        moduleName: string;
+        commandName: string;
      };

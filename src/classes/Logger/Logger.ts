@@ -74,6 +74,9 @@ export class Logger {
          case 'LOG_Blacklist_User': {
             return `User "${data.user}" (ID: ${data.userId}) has been blacklisted for the module "${data.moduleName}"!`;
          }
+         case 'LOG_Module_Command_Duplicate': {
+            return `Could not register command "${data.commandName}" for the module "${data.moduleName}": this command name already exists!`;
+         }
       }
    }
 }
