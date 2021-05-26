@@ -1,7 +1,8 @@
 import { Client, Intents, ApplicationCommandData, CommandInteraction } from 'discord.js';
 import { logger } from '../../client';
 import type { Module } from '../../modules/Module';
-import { sentByOwner } from '../../utils/message';
+import { extractCommandInfos } from '../../utils/commandInteraction';
+import { extractMessageInfos, sentByBotAdmin } from '../../utils/message';
 import { permissionWrapper } from '../../utils/permissions';
 
 export class Bot {
@@ -11,6 +12,10 @@ export class Bot {
    constructor() {
       this._client = new Client({
          intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+      });
+
+      this._client.on('ready', () => {
+         logger.log({ id: 'LOG_Logged_In', tag: this._client.user.tag });
       });
    }
 
@@ -37,27 +42,34 @@ export class Bot {
     * *It is especially useful when one needs to delete an existing slash command and should
     * be called after the bot started up.*
     * @param guildId The ID of the Guild you want to update the slash commands
-    * @see populateCommandsGeneral
+    * @see populateCommandsGlobal
     * @see [See Discord documentation](https://discord.com/developers/docs/interactions/slash-commands#registering-a-command)
     */
    async populateCommandsGuild(guildId: string) {
       const guild = await this._client.guilds.fetch(guildId);
 
-      this._client.on('message', async (msg) => {
-         if (msg.content === '!POPULATE' && sentByOwner(msg)) {
-            const commands = await guild.commands.fetch();
+      this._client.on('message', async (message) => {
+         if (message.content === '!POPULATE_GUILD') {
+            logger.log({ id: 'LOG_Populate_Guild', guild: guild.name });
 
-            await Promise.all(
-               commands.map((command) => {
-                  guild.commands.delete(command);
-               }),
-            );
+            if (sentByBotAdmin(message)) {
+               const commands = await guild.commands.fetch();
 
-            await Promise.all(
-               this._commands.map((commandData) => {
-                  guild.commands.create(commandData);
-               }),
-            );
+               await Promise.all(
+                  commands.map((command) => {
+                     guild.commands.delete(command);
+                  }),
+               );
+
+               await Promise.all(
+                  this._commands.map((commandData) => {
+                     guild.commands.create(commandData);
+                  }),
+               );
+            } else {
+               const { user, userId, guild } = extractMessageInfos(message);
+               logger.warn({ id: 'LOG_Populate_Guild_Unauthorized', user, userId, guild });
+            }
          }
       });
    }
@@ -72,22 +84,29 @@ export class Bot {
     * @see populateCommandsGuild
     * @see [See Discord documentation](https://discord.com/developers/docs/interactions/slash-commands#registering-a-command)
     */
-   populateCommandsGeneral() {
-      this._client.on('message', async (msg) => {
-         if (msg.content === '!POPULATE' && sentByOwner(msg)) {
-            const commands = await this._client.application.commands.fetch();
+   populateCommandsGlobal() {
+      this._client.on('message', async (message) => {
+         if (message.content === '!POPULATE_GLOBAL') {
+            logger.log({ id: 'LOG_Populate_Global' });
 
-            await Promise.all(
-               commands.map((command) => {
-                  this._client.application.commands.delete(command);
-               }),
-            );
+            if (sentByBotAdmin(message)) {
+               const commands = await this._client.application.commands.fetch();
 
-            await Promise.all(
-               this._commands.map((commandData) => {
-                  this._client.application.commands.create(commandData);
-               }),
-            );
+               await Promise.all(
+                  commands.map((command) => {
+                     this._client.application.commands.delete(command);
+                  }),
+               );
+
+               await Promise.all(
+                  this._commands.map((commandData) => {
+                     this._client.application.commands.create(commandData);
+                  }),
+               );
+            } else {
+               const { user, userId } = extractMessageInfos(message);
+               logger.warn({ id: 'LOG_Populate_Global_Unauthorized', user, userId });
+            }
          }
       });
    }
@@ -103,6 +122,12 @@ export class Bot {
 
          if (userCommand.isCommand()) {
             if (userCommand.commandName === name) {
+               logger.log({
+                  id: 'LOG_Received_Command',
+                  commandName: name,
+                  ...extractCommandInfos(userCommand),
+               });
+
                fn(userCommand);
             }
          }
@@ -115,10 +140,6 @@ export class Bot {
     * @see [See Discord documentation](https://discord.com/developers/docs/topics/oauth2#bots)
     */
    async run(token: string) {
-      this._client.on('ready', () => {
-         logger.log({ id: 'LOG_Logged_In', tag: this._client.user.tag });
-      });
-
       await this._client.login(token);
    }
 }
