@@ -1,6 +1,7 @@
 import { CommandInteraction } from 'discord.js';
 import { logger } from '../client';
 import { CommandFn, Module } from '../modules/Module';
+import { extractCommandInfos } from './commandInteraction';
 
 /**
  * Higher order function returning the given function only if it has the correct permissions.
@@ -25,17 +26,18 @@ export const permissionWrapper = (fn: CommandFn, module: Module): CommandFn => {
 
 const channelsPermissionWrapper = (fn: CommandFn, module: Module) => {
    return (command: CommandInteraction) => {
-      const guild = command.client.guilds.cache.get(command.guildID);
-      const channel = guild.channels.resolve(command.channelID);
+      const { channel } = extractCommandInfos(command);
 
       if (module.whitelist?.channels?.length > 0) {
-         if (!module.whitelist.channels.includes(channel.name)) {
+         if (!module.whitelist.channels.includes(channel)) {
+            logger.warn({ id: 'LOG_Whitelist_Channel', channel, moduleName: module.name });
             return;
          }
       }
 
       if (module.blacklist?.channels?.length > 0) {
-         if (module.blacklist.channels.includes(channel.name)) {
+         if (module.blacklist.channels.includes(channel)) {
+            logger.warn({ id: 'LOG_Blacklist_Channel', channel, moduleName: module.name });
             return;
          }
       }
@@ -46,16 +48,18 @@ const channelsPermissionWrapper = (fn: CommandFn, module: Module) => {
 
 const usersPermissionWrapper = (fn: CommandFn, module: Module) => {
    return (command: CommandInteraction) => {
-      const userId = command.member.user.id;
+      const { user, userId } = extractCommandInfos(command);
 
       if (module.whitelist?.users?.length > 0) {
          if (!module.whitelist.users.includes(userId)) {
+            logger.warn({ id: 'LOG_Whitelist_User', user, userId, moduleName: module.name });
             return;
          }
       }
 
       if (module.blacklist?.users?.length > 0) {
          if (module.blacklist.users.includes(userId)) {
+            logger.warn({ id: 'LOG_Blacklist_User', user, userId, moduleName: module.name });
             return;
          }
       }
