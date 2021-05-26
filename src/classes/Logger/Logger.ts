@@ -47,6 +47,33 @@ export class Logger {
          case 'LOG_Add_Module_Command': {
             return `> Registering command "/${data.commandName}"...`;
          }
+         case 'LOG_Received_Command': {
+            return `Received command "/${data.commandName}" from user "${data.user}" (ID: ${data.userId}) in channel "${data.channel}" (guild "${data.guild}")`;
+         }
+         case 'LOG_Populate_Guild': {
+            return `Refreshing guild slash commands for guild "${data.guild}"...`;
+         }
+         case 'LOG_Populate_Global': {
+            return `Refreshing global slash commands...`;
+         }
+         case 'LOG_Populate_Guild_Unauthorized': {
+            return `User "${data.user}" (ID: ${data.userId}) in guild "${data.guild}" does not have the right to refresh guild slash commands!`;
+         }
+         case 'LOG_Populate_Global_Unauthorized': {
+            return `User "${data.user}" (ID: ${data.userId}) does not have the right to refresh global slash commands!`;
+         }
+         case 'LOG_Whitelist_Channel': {
+            return `Channel "${data.channel}" has not been whitelisted for the module "${data.moduleName}"!`;
+         }
+         case 'LOG_Blacklist_Channel': {
+            return `Channel "${data.channel}" has been blacklisted for the module "${data.moduleName}"!`;
+         }
+         case 'LOG_Whitelist_User': {
+            return `User "${data.user}" (ID: ${data.userId}) has not been whitelisted for the module "${data.moduleName}"!`;
+         }
+         case 'LOG_Blacklist_User': {
+            return `User "${data.user}" (ID: ${data.userId}) has been blacklisted for the module "${data.moduleName}"!`;
+         }
       }
    }
 }
