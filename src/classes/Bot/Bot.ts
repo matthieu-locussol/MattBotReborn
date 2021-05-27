@@ -130,6 +130,7 @@ export class Bot {
                logger.log({
                   id: 'LOG_Received_Command',
                   commandName: name,
+                  options: userCommand.options,
                   ...extractCommandInfos(userCommand),
                });
 

@@ -1,3 +1,4 @@
+import { serializeOptions } from '../../utils/commandInteractionOption';
 import { currentTime } from '../../utils/date';
 import { LogData } from './LogData';
 
@@ -45,7 +46,8 @@ export class Logger {
             return `Registering module "${data.moduleName}"...`;
          }
          case 'LOG_Received_Command': {
-            return `Received command "/${data.commandName}" from user "${data.user}" (ID: ${data.userId}) in channel "${data.channel}" (guild "${data.guild}")`;
+            const serializedOptions = serializeOptions(data.options);
+            return `Received command "/${data.commandName}${serializedOptions}" from user "${data.user}" (ID: ${data.userId}) in channel "${data.channel}" (guild "${data.guild}")`;
          }
          case 'LOG_Populate_Guild': {
             return `Refreshing guild slash commands for guild "${data.guild}"...`;
@@ -76,6 +78,12 @@ export class Logger {
          }
          case 'LOG_Unkown_Module_Command': {
             return `Unknown command for module "${data.moduleName}"!`;
+         }
+         case 'LOG_Osu_Unable_Associate_Username': {
+            return `Could not associate the osu! username "${data.username}" for the user "${data.user}"!`;
+         }
+         case 'LOG_Osu_Associated_Username': {
+            return `Successfully associated the osu! username "${data.username}" for the user "${data.user}"`;
          }
       }
    }

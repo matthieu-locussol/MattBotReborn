@@ -1,3 +1,5 @@
+import { CommandInteractionOption } from 'discord.js';
+
 export const LOG_LOGGED_IN = 'LOG_Logged_In';
 export const LOG_PERMISSIONLISTS_COLLISION = 'LOG_PermissionLists_Collision';
 export const LOG_ADD_MODULE = 'LOG_Add_Module';
@@ -12,6 +14,8 @@ export const LOG_WHITELIST_USER = 'LOG_Whitelist_User';
 export const LOG_BLACKLIST_USER = 'LOG_Blacklist_User';
 export const LOG_MODULE_COMMAND_DUPLICATE = 'LOG_Module_Command_Duplicate';
 export const LOG_UNKNOWN_MODULE_COMMAND = 'LOG_Unkown_Module_Command';
+export const LOG_OSU_UNABLE_ASSOCIATE_USERNAME = 'LOG_Osu_Unable_Associate_Username';
+export const LOG_OSU_ASSOCIATED_USERNAME = 'LOG_Osu_Associated_Username';
 
 export type LogData =
    | {
@@ -30,6 +34,7 @@ export type LogData =
    | {
         id: typeof LOG_RECEIVED_COMMAND;
         commandName: string;
+        options: CommandInteractionOption[];
         user: string;
         userId: string;
         channel: string;
@@ -83,4 +88,14 @@ export type LogData =
    | {
         id: typeof LOG_UNKNOWN_MODULE_COMMAND;
         moduleName: string;
+     }
+   | {
+        id: typeof LOG_OSU_UNABLE_ASSOCIATE_USERNAME;
+        user: string;
+        username: string;
+     }
+   | {
+        id: typeof LOG_OSU_ASSOCIATED_USERNAME;
+        user: string;
+        username: string;
      };
