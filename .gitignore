@@ -1,5 +1,6 @@
 /.vscode
 /build
+/cache/*.json
 /logs/*.log
 /node_modules
 
