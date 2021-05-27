@@ -1,37 +1,33 @@
+import winston from 'winston';
 import { serializeOptions } from '../../utils/commandInteractionOption';
 import { currentTime } from '../../utils/date';
 import { LogData } from './LogData';
 
-const LOG_TYPE = {
-   INFO: '[INFO]',
-   WARN: '[WARN]',
-   ERROR: '[ERROR]',
-};
-
-type LogLevel = keyof typeof LOG_TYPE;
-
 export class Logger {
    private _logs: LogData[];
+   private _logger: winston.Logger;
 
    constructor() {
       this._logs = [];
+      this._logger = winston.createLogger({
+         transports: [new winston.transports.Console()],
+         format: winston.format.printf((log) => `[${log.level.toUpperCase()}] ${currentTime()} > ${log.message}`),
+      });
    }
 
    log(data: LogData) {
-      this._push(data, 'INFO', console.log);
+      this._logs.push(data);
+      this._logger.log('info', this._serializeData(data));
    }
 
    warn(data: LogData) {
-      this._push(data, 'WARN', console.warn);
+      this._logs.push(data);
+      this._logger.log('warn', this._serializeData(data));
    }
 
    error(data: LogData) {
-      this._push(data, 'ERROR', console.error);
-   }
-
-   private _push(data: LogData, level: LogLevel, logFn: (...data: unknown[]) => void) {
       this._logs.push(data);
-      logFn(`${LOG_TYPE[level]} ${currentTime()} ${this._serializeData(data)}`);
+      this._logger.log('error', this._serializeData(data));
    }
 
    private _serializeData(data: LogData) {

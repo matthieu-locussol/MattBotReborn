@@ -22,7 +22,8 @@
       "discord.js": "https://github.com/discordjs/discord.js",
       "i18next": "^20.3.0",
       "keyv": "^4.0.3",
-      "keyv-file": "^0.2.0"
+      "keyv-file": "^0.2.0",
+      "winston": "^3.3.3"
    },
    "devDependencies": {
       "@types/keyv": "^3.1.1",
