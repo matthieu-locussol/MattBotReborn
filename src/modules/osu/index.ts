@@ -1,10 +1,7 @@
-import Keyv = require('keyv');
-import KeyvFile from 'keyv-file';
-import { resolve } from 'path';
 import { logger } from '../../client';
 import { buildTranslationFunction } from '../../locales';
 import { getIntegerOption, getStringOption } from '../../utils/commandInteractionOption';
-import type { CommandFn, Module } from '../Module';
+import { buildCache, CommandFn, Module } from '../Module';
 import { initializeCache, OsuModuleCache } from './cache';
 import { associate } from './subcommands/associate';
 import { beatmap } from './subcommands/beatmap';
@@ -48,12 +45,7 @@ const osu: CommandFn = async (command) => {
 
 export const osuModule: Module<OsuModuleCache> = {
    name: 'Osu!',
-   cache: new Keyv<OsuModuleCache>({
-      store: new KeyvFile<OsuModuleCache>({
-         filename: resolve(__dirname, '../../../cache/osu.json'),
-         expiredCheckDelay: 1000 * 60 * 60 * 24 * 365, // One year in ms
-      }),
-   }),
+   cache: buildCache('osu'),
    t: buildTranslationFunction('osu'),
    command: {
       name: 'osu',
