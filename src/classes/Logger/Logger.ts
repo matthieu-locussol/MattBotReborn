@@ -85,6 +85,9 @@ export class Logger {
          case 'LOG_Osu_Associated_Username': {
             return `Successfully associated the osu! username "${data.username}" for the user "${data.user}"`;
          }
+         case 'LOG_Lang_Updated': {
+            return `Successfully set language "${data.language}" for guild ${data.guildId}`;
+         }
       }
    }
 }

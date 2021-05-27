@@ -16,6 +16,7 @@ export const LOG_MODULE_COMMAND_DUPLICATE = 'LOG_Module_Command_Duplicate';
 export const LOG_UNKNOWN_MODULE_COMMAND = 'LOG_Unkown_Module_Command';
 export const LOG_OSU_UNABLE_ASSOCIATE_USERNAME = 'LOG_Osu_Unable_Associate_Username';
 export const LOG_OSU_ASSOCIATED_USERNAME = 'LOG_Osu_Associated_Username';
+export const LOG_LANG_UPDATED = 'LOG_Lang_Updated';
 
 export type LogData =
    | {
@@ -98,4 +99,9 @@ export type LogData =
         id: typeof LOG_OSU_ASSOCIATED_USERNAME;
         user: string;
         username: string;
+     }
+   | {
+        id: typeof LOG_LANG_UPDATED;
+        language: string;
+        guildId: string;
      };
