@@ -3,14 +3,11 @@ import { osuModule } from '.';
 import { extractCommandInfos } from '../../utils/commandInteraction';
 
 export type OsuModuleCache = {
-   associations: {
-      userId: string;
-      username: string;
-   }[];
+   associations: Record<string, string>;
 };
 
 export const defaultCache: OsuModuleCache = {
-   associations: [],
+   associations: {},
 };
 
 export const initializeCache = async (command: CommandInteraction) => {

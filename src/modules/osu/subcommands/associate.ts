@@ -6,12 +6,7 @@ export const associate = async (command: CommandInteraction, username: string) =
    const { userId, guildId } = extractCommandInfos(command);
 
    const cache = await osuModule.cache.get(guildId);
-   const entry = {
-      userId,
-      username,
-   };
-
-   cache.associations.push(entry);
+   cache.associations[userId] = username;
 
    osuModule.cache.set(guildId, cache);
 };
