@@ -177,5 +177,12 @@ export class Bot {
     */
    async run(token: string) {
       await this._client.login(token);
+
+      this._client.on('guildCreate', (guild) => {
+         logger.log({ id: 'LOG_Bot_Joined_Guild', guild: guild.name, guildId: guild.id });
+      });
+      this._client.on('guildDelete', (guild) => {
+         logger.log({ id: 'LOG_Bot_Removed_Guild', guild: guild.name, guildId: guild.id });
+      });
    }
 }

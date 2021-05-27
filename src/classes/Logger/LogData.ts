@@ -17,6 +17,8 @@ export const LOG_UNKNOWN_MODULE_COMMAND = 'LOG_Unkown_Module_Command';
 export const LOG_OSU_UNABLE_ASSOCIATE_USERNAME = 'LOG_Osu_Unable_Associate_Username';
 export const LOG_OSU_ASSOCIATED_USERNAME = 'LOG_Osu_Associated_Username';
 export const LOG_LANG_UPDATED = 'LOG_Lang_Updated';
+export const LOG_BOT_JOINED_GUILD = 'LOG_Bot_Joined_Guild';
+export const LOG_BOT_REMOVED_GUILD = 'LOG_Bot_Removed_Guild';
 
 export type LogData =
    | {
@@ -103,5 +105,15 @@ export type LogData =
    | {
         id: typeof LOG_LANG_UPDATED;
         language: string;
+        guildId: string;
+     }
+   | {
+        id: typeof LOG_BOT_JOINED_GUILD;
+        guild: string;
+        guildId: string;
+     }
+   | {
+        id: typeof LOG_BOT_REMOVED_GUILD;
+        guild: string;
         guildId: string;
      };

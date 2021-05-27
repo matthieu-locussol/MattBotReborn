@@ -88,6 +88,12 @@ export class Logger {
          case 'LOG_Lang_Updated': {
             return `Successfully set language "${data.language}" for guild ${data.guildId}`;
          }
+         case 'LOG_Bot_Joined_Guild': {
+            return `MattBot joined server "${data.guild}" (ID: ${data.guildId})`;
+         }
+         case 'LOG_Bot_Removed_Guild': {
+            return `MattBot has been removed from server "${data.guild}" (ID: ${data.guildId})`;
+         }
       }
    }
 }
