@@ -23,7 +23,7 @@ export const serializeOptions = (options: CommandInteractionOption[]) => {
    for (const option of options) {
       if (option.type === 'SUB_COMMAND') {
          const suboptions = serializeOptions(option.options);
-         serializedOptions += ` ${option.name} ${suboptions}`;
+         serializedOptions += ` ${option.name}${suboptions}`;
       } else {
          serializedOptions += ` ${option.value}`;
       }

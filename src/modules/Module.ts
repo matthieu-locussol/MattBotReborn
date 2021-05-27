@@ -1,5 +1,6 @@
 import { ApplicationCommandData, CommandInteraction } from 'discord.js';
 import Keyv = require('keyv');
+import { TFunction } from 'i18next';
 
 export type CommandFn = (command: CommandInteraction) => void;
 
@@ -18,4 +19,5 @@ export type Module<T = unknown> = {
    name: string;
    blacklist?: PermissionList;
    whitelist?: PermissionList;
+   t?: TFunction;
 };

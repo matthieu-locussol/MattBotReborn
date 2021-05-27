@@ -1,4 +1,7 @@
-import { Client, Intents, ApplicationCommandData, CommandInteraction } from 'discord.js';
+import { ApplicationCommandData, Client, CommandInteraction, Intents } from 'discord.js';
+import { writeFileSync } from 'fs';
+import { resolve } from 'path';
+import locales from '../../../cache/locales.json';
 import { logger } from '../../client';
 import type { Module } from '../../modules/Module';
 import { extractCommandInfos } from '../../utils/commandInteraction';
@@ -8,6 +11,7 @@ import { permissionWrapper } from '../../utils/permissions';
 export class Bot {
    private _client: Client;
    private _commands: ApplicationCommandData[] = [];
+   private _locales: Record<string, string> = locales;
 
    constructor() {
       this._client = new Client({
@@ -17,6 +21,15 @@ export class Bot {
       this._client.on('ready', () => {
          logger.log({ id: 'LOG_Logged_In', tag: this._client.user.tag });
       });
+   }
+
+   getLocale(guildId: string) {
+      return this._locales[guildId];
+   }
+
+   setLocale(guildId: string, locale: string) {
+      this._locales[guildId] = locale;
+      writeFileSync(resolve(__dirname, '../../../cache/locales.json'), JSON.stringify(this._locales, null, 2));
    }
 
    /**

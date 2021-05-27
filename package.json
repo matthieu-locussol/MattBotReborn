@@ -20,6 +20,7 @@
    ],
    "dependencies": {
       "discord.js": "https://github.com/discordjs/discord.js",
+      "i18next": "^20.3.0",
       "keyv": "^4.0.3",
       "keyv-file": "^0.2.0"
    },

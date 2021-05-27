@@ -1,6 +1,7 @@
 {
    "compilerOptions": {
       "outDir": "build",
+      "esModuleInterop": true,
       "resolveJsonModule": true,
       "typeRoots": ["./types", "node_modules/@types"]
    },

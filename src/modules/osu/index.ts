@@ -2,6 +2,7 @@ import Keyv = require('keyv');
 import KeyvFile from 'keyv-file';
 import { resolve } from 'path';
 import { logger } from '../../client';
+import { buildTranslationFunction } from '../../locales';
 import { getIntegerOption, getStringOption } from '../../utils/commandInteractionOption';
 import type { CommandFn, Module } from '../Module';
 import { initializeCache, OsuModuleCache } from './cache';
@@ -53,6 +54,7 @@ export const osuModule: Module<OsuModuleCache> = {
          expiredCheckDelay: 1000 * 60 * 60 * 24 * 365, // One year in ms
       }),
    }),
+   t: buildTranslationFunction('osu'),
    command: {
       name: 'osu',
       description: 'Commands related to the osu! rythm game',
