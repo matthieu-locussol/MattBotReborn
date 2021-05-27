@@ -23,15 +23,29 @@ export class Bot {
       });
    }
 
+   /**
+    * Gets the locale associated to a discord guild.
+    * @param guildId The guild id you want to get the locale
+    * @returns The locale of this guild
+    */
    getLocale(guildId: string) {
       return this._locales[guildId];
    }
 
+   /**
+    * Sets the locale for a specific discord guild.
+    * @param guildId The guild id you want to set the locale for
+    * @param locale The locale you want to associate to this guild id
+    */
    setLocale(guildId: string, locale: string) {
       this._locales[guildId] = locale;
       writeFileSync(resolve(__dirname, '../../../cache/locales.json'), JSON.stringify(this._locales, null, 2));
    }
 
+   /**
+    * Loads the locales from the locales.json cache file or creates the file if it does not exist.
+    * @returns The loaded locales data
+    */
    private _loadLocales() {
       const path = resolve(__dirname, '../../../cache/locales.json');
 
