@@ -3,10 +3,9 @@ import Keyv = require('keyv');
 
 export type CommandFn = (command: CommandInteraction) => void;
 
-export type Command = {
+export interface Command extends ApplicationCommandData {
    fn: CommandFn;
-   infos: ApplicationCommandData;
-};
+}
 
 export type PermissionList = {
    channels?: string[];
@@ -15,7 +14,7 @@ export type PermissionList = {
 
 export type Module<T = unknown> = {
    cache?: Keyv<T>;
-   commands: Command[];
+   command: Command;
    name: string;
    blacklist?: PermissionList;
    whitelist?: PermissionList;

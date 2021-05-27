@@ -53,80 +53,76 @@ export const osuModule: Module<OsuModuleCache> = {
          expiredCheckDelay: 1000 * 60 * 60 * 24 * 365, // One year in ms
       }),
    }),
-   commands: [
-      {
-         infos: {
-            name: 'osu',
-            description: 'Commands related to the osu! rythm game',
+   command: {
+      name: 'osu',
+      description: 'Commands related to the osu! rythm game',
+      options: [
+         {
+            name: 'recent',
+            description: 'Returns the recent scores for an osu! user',
+            type: 'SUB_COMMAND',
             options: [
                {
-                  name: 'recent',
-                  description: 'Returns the recent scores for an osu! user',
-                  type: 'SUB_COMMAND',
-                  options: [
-                     {
-                        name: 'username',
-                        description: 'The osu! user you want to get a recent score',
-                        type: 'STRING',
-                     },
-                     {
-                        name: 'index',
-                        description: 'Which recent score do you want? The 1st? The 13th? (between 1 and 50)',
-                        type: 'INTEGER',
-                     },
-                  ],
+                  name: 'username',
+                  description: 'The osu! user you want to get a recent score',
+                  type: 'STRING',
                },
                {
-                  name: 'beatmap',
-                  description: "Returns an osu! user's best score on a given beatmap",
-                  type: 'SUB_COMMAND',
-                  options: [
-                     {
-                        name: 'id',
-                        description: 'The id of the beatmap you want to look for the score',
-                        type: 'INTEGER',
-                        required: true,
-                     },
-                     {
-                        name: 'username',
-                        description: 'The osu! user you want to get the score',
-                        type: 'STRING',
-                     },
-                  ],
-               },
-               {
-                  name: 'top',
-                  description: 'Returns an osu! player top scores',
-                  type: 'SUB_COMMAND',
-                  options: [
-                     {
-                        name: 'username',
-                        description: 'The osu! user you want to get the top scores',
-                        type: 'STRING',
-                     },
-                     {
-                        name: 'count',
-                        description: 'How many top scores you want to retrieve (between 1 and 10)',
-                        type: 'INTEGER',
-                     },
-                  ],
-               },
-               {
-                  name: 'associate',
-                  description: 'Associates an osu! username to your discord account',
-                  type: 'SUB_COMMAND',
-                  options: [
-                     {
-                        name: 'username',
-                        description: 'The osu! username you want to associate with your discord account',
-                        type: 'STRING',
-                        required: true,
-                     },
-                  ],
+                  name: 'index',
+                  description: 'Which recent score do you want? The 1st? The 13th? (between 1 and 50)',
+                  type: 'INTEGER',
                },
             ],
          },
-         fn: osu,
-      },
-   ],
+         {
+            name: 'beatmap',
+            description: "Returns an osu! user's best score on a given beatmap",
+            type: 'SUB_COMMAND',
+            options: [
+               {
+                  name: 'id',
+                  description: 'The id of the beatmap you want to look for the score',
+                  type: 'INTEGER',
+                  required: true,
+               },
+               {
+                  name: 'username',
+                  description: 'The osu! user you want to get the score',
+                  type: 'STRING',
+               },
+            ],
+         },
+         {
+            name: 'top',
+            description: 'Returns an osu! player top scores',
+            type: 'SUB_COMMAND',
+            options: [
+               {
+                  name: 'username',
+                  description: 'The osu! user you want to get the top scores',
+                  type: 'STRING',
+               },
+               {
+                  name: 'count',
+                  description: 'How many top scores you want to retrieve (between 1 and 10)',
+                  type: 'INTEGER',
+               },
+            ],
+         },
+         {
+            name: 'associate',
+            description: 'Associates an osu! username to your discord account',
+            type: 'SUB_COMMAND',
+            options: [
+               {
+                  name: 'username',
+                  description: 'The osu! username you want to associate with your discord account',
+                  type: 'STRING',
+                  required: true,
+               },
+            ],
+         },
+      ],
+      fn: osu,
+   },
 };

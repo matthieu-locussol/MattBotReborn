@@ -26,21 +26,17 @@ export class Bot {
    addModule(module: Module) {
       logger.log({ id: 'LOG_Add_Module', moduleName: module.name });
 
-      module.commands.forEach((command) => {
-         logger.log({ id: 'LOG_Add_Module_Command', commandName: command.infos.name });
-
-         const index = this._commands.findIndex((c) => c.name === command.infos.name);
-         if (index === -1) {
-            this._commands.push(command.infos);
-            this.onCommand(command.infos.name, permissionWrapper(command.fn, module));
-         } else {
-            logger.error({
-               id: 'LOG_Module_Command_Duplicate',
-               moduleName: module.name,
-               commandName: command.infos.name,
-            });
-         }
-      });
+      const index = this._commands.findIndex((c) => c.name === module.command.name);
+      if (index === -1) {
+         this._commands.push(module.command);
+         this.onCommand(module.command.name, permissionWrapper(module.command.fn, module));
+      } else {
+         logger.error({
+            id: 'LOG_Module_Command_Duplicate',
+            moduleName: module.name,
+            commandName: module.command.name,
+         });
+      }
    }
 
    /**

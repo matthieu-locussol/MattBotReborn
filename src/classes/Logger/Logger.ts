@@ -44,9 +44,6 @@ export class Logger {
          case 'LOG_Add_Module': {
             return `Registering module "${data.moduleName}"...`;
          }
-         case 'LOG_Add_Module_Command': {
-            return `> Registering command "/${data.commandName}"...`;
-         }
          case 'LOG_Received_Command': {
             return `Received command "/${data.commandName}" from user "${data.user}" (ID: ${data.userId}) in channel "${data.channel}" (guild "${data.guild}")`;
          }

@@ -1,7 +1,6 @@
 export const LOG_LOGGED_IN = 'LOG_Logged_In';
 export const LOG_PERMISSIONLISTS_COLLISION = 'LOG_PermissionLists_Collision';
 export const LOG_ADD_MODULE = 'LOG_Add_Module';
-export const LOG_ADD_MODULE_COMMAND = 'LOG_Add_Module_Command';
 export const LOG_RECEIVED_COMMAND = 'LOG_Received_Command';
 export const LOG_POPULATE_GUILD = 'LOG_Populate_Guild';
 export const LOG_POPULATE_GLOBAL = 'LOG_Populate_Global';
@@ -27,10 +26,6 @@ export type LogData =
    | {
         id: typeof LOG_ADD_MODULE;
         moduleName: string;
-     }
-   | {
-        id: typeof LOG_ADD_MODULE_COMMAND;
-        commandName: string;
      }
    | {
         id: typeof LOG_RECEIVED_COMMAND;
