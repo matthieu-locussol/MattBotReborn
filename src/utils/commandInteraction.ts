@@ -10,9 +10,10 @@ export const extractCommandInfos = (command: CommandInteraction) => {
    const channelObject = guildObject.channels.resolve(command.channelID);
 
    const guild = guildObject.name;
+   const guildId = guildObject.id;
    const channel = channelObject.name;
    const user = command.member.user.username;
    const userId = `${command.member.user.id}`;
 
-   return { guild, channel, user, userId };
+   return { guild, guildId, channel, user, userId };
 };
