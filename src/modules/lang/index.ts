@@ -12,7 +12,6 @@ const lang: CommandFn = (command) => {
    bot.setLocale(guildId, language);
 
    logger.log({ id: 'LOG_Lang_Updated', language, guildId });
-
    command.reply(t('successfullyChanged', guildId));
 };
 

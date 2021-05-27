@@ -1,5 +1,5 @@
 import { ApplicationCommandData, Client, CommandInteraction, Intents } from 'discord.js';
-import { readFileSync, writeFileSync } from 'fs';
+import { readFileSync, writeFileSync, statSync } from 'fs';
 import { resolve } from 'path';
 import { logger } from '../../client';
 import type { Module } from '../../modules/Module';
@@ -33,7 +33,17 @@ export class Bot {
    }
 
    private _loadLocales() {
-      const buffer = readFileSync(resolve(__dirname, '../../../cache/locales.json'));
+      const path = resolve(__dirname, '../../../cache/locales.json');
+
+      try {
+         statSync(path);
+      } catch (error) {
+         if (error?.code === 'ENOENT') {
+            writeFileSync(path, JSON.stringify({}));
+         }
+      }
+
+      const buffer = readFileSync(path);
       const locales = JSON.parse(buffer.toString());
 
       return locales;
