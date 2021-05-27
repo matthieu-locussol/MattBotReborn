@@ -1,4 +1,5 @@
 import { ApplicationCommandData, CommandInteraction } from 'discord.js';
+import Keyv = require('keyv');
 
 export type CommandFn = (command: CommandInteraction) => void;
 
@@ -12,7 +13,8 @@ export type PermissionList = {
    users?: string[];
 };
 
-export type Module = {
+export type Module<T = unknown> = {
+   cache?: Keyv<T>;
    commands: Command[];
    name: string;
    blacklist?: PermissionList;

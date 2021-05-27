@@ -1,34 +1,40 @@
+import Keyv = require('keyv');
+import KeyvFile from 'keyv-file';
+import { resolve } from 'path';
 import { logger } from '../../client';
 import { getIntegerOption, getStringOption } from '../../utils/commandInteractionOption';
 import type { CommandFn, Module } from '../Module';
+import { initializeCache, OsuModuleCache } from './cache';
 import { associate } from './subcommands/associate';
 import { beatmap } from './subcommands/beatmap';
 import { recent } from './subcommands/recent';
 import { top } from './subcommands/top';
 
-const osu: CommandFn = (command) => {
-   const option = command.options[0];
+const osu: CommandFn = async (command) => {
+   await initializeCache(command);
 
-   switch (option.name) {
+   const subcommand = command.options[0];
+
+   switch (subcommand.name) {
       case 'recent': {
-         const username = getStringOption(option.options, 'username');
+         const username = getStringOption(subcommand.options, 'username');
          recent(command, username);
          break;
       }
       case 'beatmap': {
-         const id = getIntegerOption(option.options, 'id');
-         const username = getStringOption(option.options, 'username');
+         const id = getIntegerOption(subcommand.options, 'id');
+         const username = getStringOption(subcommand.options, 'username');
          beatmap(command, id, username);
          break;
       }
       case 'top': {
-         const username = getStringOption(option.options, 'username');
-         const count = getIntegerOption(option.options, 'count');
+         const username = getStringOption(subcommand.options, 'username');
+         const count = getIntegerOption(subcommand.options, 'count');
          top(command, username, count);
          break;
       }
       case 'associate': {
-         const username = getStringOption(option.options, 'username');
+         const username = getStringOption(subcommand.options, 'username');
          associate(command, username);
          break;
       }
@@ -39,8 +45,14 @@ const osu: CommandFn = (command) => {
    }
 };
 
-export const osuModule: Module = {
+export const osuModule: Module<OsuModuleCache> = {
    name: 'Osu!',
+   cache: new Keyv<OsuModuleCache>({
+      store: new KeyvFile<OsuModuleCache>({
+         filename: resolve(__dirname, '../../../cache/osu.json'),
+         expiredCheckDelay: 1000 * 60 * 60 * 24 * 365, // One year in ms
+      }),
+   }),
    commands: [
       {
          infos: {
