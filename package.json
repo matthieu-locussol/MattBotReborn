@@ -24,7 +24,7 @@
       "i18next": "^20.3.0",
       "keyv": "^4.0.3",
       "keyv-file": "^0.2.0",
-      "osu-api-extended": "^1.0.11",
+      "node-osu": "^2.2.1",
       "winston": "^3.3.3"
    },
    "devDependencies": {
