@@ -1,8 +1,9 @@
 import { ApplicationCommandData, CommandInteraction } from 'discord.js';
-import { TFunction } from 'i18next';
+import { StringMap } from 'i18next';
 import KeyvFile from 'keyv-file';
 import { resolve } from 'path';
 import Keyv = require('keyv');
+import { TranslationFunction } from '../locales';
 
 export type CommandFn = (command: CommandInteraction) => void;
 
@@ -21,7 +22,7 @@ export type Module<T = unknown> = {
    name: string;
    blacklist?: PermissionList;
    whitelist?: PermissionList;
-   t?: TFunction;
+   t?: TranslationFunction<StringMap>;
 };
 
 /**
