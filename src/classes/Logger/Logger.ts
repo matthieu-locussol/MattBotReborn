@@ -76,7 +76,7 @@ export class Logger {
             return `Unknown command for module "${data.moduleName}"!`;
          }
          case 'LOG_Osu_Unable_Associate_Username': {
-            return `Could not associate the osu! username "${data.username}" for the user "${data.user}"!`;
+            return `Could not associate the osu! username "${data.username}" for the user "${data.user}"!\n${data.error}`;
          }
          case 'LOG_Osu_Associated_Username': {
             return `Successfully associated the osu! username "${data.username}" for the user "${data.user}"`;

@@ -16,6 +16,6 @@ export const associate = async (command: CommandInteraction, username: string) =
       command.reply(t('associateSuccess', guildId, { username }));
       logger.log({ id: 'LOG_Osu_Associated_Username', user, username });
    } catch (error) {
-      logger.error({ id: 'LOG_Osu_Unable_Associate_Username', user, username });
+      logger.error({ id: 'LOG_Osu_Unable_Associate_Username', user, username, error });
    }
 };

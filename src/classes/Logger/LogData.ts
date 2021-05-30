@@ -96,6 +96,7 @@ export type LogData =
         id: typeof LOG_OSU_UNABLE_ASSOCIATE_USERNAME;
         user: string;
         username: string;
+        error: string;
      }
    | {
         id: typeof LOG_OSU_ASSOCIATED_USERNAME;
