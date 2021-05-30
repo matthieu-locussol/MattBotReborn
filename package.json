@@ -19,6 +19,7 @@
       "check:prettier"
    ],
    "dependencies": {
+      "axios": "^0.21.1",
       "discord.js": "https://github.com/discordjs/discord.js",
       "i18next": "^20.3.0",
       "keyv": "^4.0.3",
