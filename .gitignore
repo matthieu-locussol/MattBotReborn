@@ -1,6 +1,7 @@
 /.vscode
 /build
 /cache/*.json
+/cache/osu/*.png
 /logs/*.log
 /node_modules
 
