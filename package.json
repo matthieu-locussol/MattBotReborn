@@ -20,14 +20,21 @@
    ],
    "dependencies": {
       "axios": "^0.21.1",
+      "chart.js": "2.9.3",
+      "chartjs-node-canvas": "3.0.6",
+      "child-process-promise": "^2.2.1",
       "discord.js": "https://github.com/discordjs/discord.js",
       "i18next": "^20.3.0",
       "keyv": "^4.0.3",
       "keyv-file": "^0.2.0",
+      "moment": "^2.29.1",
       "node-osu": "^2.2.1",
+      "ojsama": "^2.2.0",
       "winston": "^3.3.3"
    },
    "devDependencies": {
+      "@types/chart.js": "^2.9.32",
+      "@types/child-process-promise": "^2.2.1",
       "@types/keyv": "^3.1.1",
       "@types/node": "^15.6.0",
       "@typescript-eslint/eslint-plugin": "^4.24.0",
