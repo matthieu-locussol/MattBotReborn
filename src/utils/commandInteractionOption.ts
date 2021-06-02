@@ -17,15 +17,17 @@ export const getBooleanOption = (options: CommandInteractionOption[], key: strin
  * @param options The options you want to serialize
  * @returns The serialized options as a string
  */
-export const serializeOptions = (options: CommandInteractionOption[]) => {
+export const serializeOptions = (options?: CommandInteractionOption[]) => {
    let serializedOptions = '';
 
-   for (const option of options) {
-      if (option.type === 'SUB_COMMAND') {
-         const suboptions = serializeOptions(option.options);
-         serializedOptions += ` ${option.name}${suboptions}`;
-      } else {
-         serializedOptions += ` ${option.value}`;
+   if (options) {
+      for (const option of options) {
+         if (option.type === 'SUB_COMMAND') {
+            const suboptions = serializeOptions(option.options);
+            serializedOptions += ` ${option.name}${suboptions}`;
+         } else {
+            serializedOptions += ` ${option.value}`;
+         }
       }
    }
 
