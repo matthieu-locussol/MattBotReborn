@@ -1,4 +1,5 @@
 import i18next, { StringMap, TFunctionKeys, TFunctionResult, TOptions } from 'i18next';
+import moment from 'moment';
 import { bot } from '../client';
 import langEn from './en/lang.json';
 import osuEn from './en/osu.json';
@@ -9,20 +10,35 @@ import pingFr from './fr/ping.json';
 
 const resources = {
    fr: {
-      ping: pingFr,
       lang: langFr,
       osu: osuFr,
+      ping: pingFr,
    },
    en: {
-      ping: pingEn,
       lang: langEn,
       osu: osuEn,
+      ping: pingEn,
    },
 };
 
 export const initializeLocales = () =>
    i18next.init({
       resources,
+      interpolation: {
+         format: function (value, format, lang) {
+            if (value instanceof Date) {
+               if (format) {
+                  return moment(value).format(format);
+               }
+
+               if (lang === 'en') {
+                  return moment(value).format('MM/DD/YYYY');
+               } else if (lang === 'fr') {
+                  return moment(value).format('DD/MM/YYYY');
+               }
+            }
+         },
+      },
    });
 
 export type TranslationFunction<T extends Record<string, unknown>> = <
