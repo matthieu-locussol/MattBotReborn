@@ -15,8 +15,10 @@ const osu: CommandFn = async (command) => {
 
    switch (subcommand.name) {
       case 'recent': {
+         await command.defer();
          const username = getStringOption(subcommand.options, 'username');
-         recent(command, username);
+         const index = getIntegerOption(subcommand.options, 'index');
+         recent(command, username, index);
          break;
       }
       case 'beatmap': {
