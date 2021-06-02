@@ -1,3 +1,37 @@
 {
-   "associateSuccess": "Your discord account has been associated to the \"{{username}}\" nickname on osu!"
+   "associateSuccess": "Your discord account has been associated to the `{{username}}` nickname on osu!",
+   "noUsernameAssociated": "You don't have any osu nickname associated to your discord account!",
+   "noRecentPlayFound": "Could not find any recent play for the player `{{username}}`!",
+   "state": {
+      "graveyard": "Graveyard",
+      "wip": "WIP",
+      "pending": "Pending",
+      "ranked": "Ranked",
+      "approved": "Approved",
+      "qualified": "Qualified",
+      "loved": "Loved"
+   },
+   "recent": {
+      "author": "{{player}}: {{ppUser}}pp | WR • #{{worldRank}} | {{country}} • #{{countryRank}}",
+      "title": "{{- artist}} - {{- title}} [{{- difficulty}}]",
+      "description": "",
+      "description_wr": "***World record #{{worldIndex}}***",
+      "description_wr_mods": "***World record #{{worldIndex}}***",
+      "description_pb": "***Personal best #{{bestIndex}}***",
+      "description_pb_mods": "***Personal best #{{bestIndex}}***",
+      "description_wr_pb": "***World record #{{worldIndex}}*** • ***Personal best #{{bestIndex}}***",
+      "description_wr_pb_mods": "***World record #{{worldIndex}}*** • ***Personal best #{{bestIndex}}***",
+      "score": "{{- emoji}} • {{score}} • {{accuracy}}% • {{date}}",
+      "score_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "score_pb_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "score_wr_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "score_wr_pb_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "score_fail": "{{- emoji}} ({{progress}}%) • {{score}} • {{accuracy}}% • {{date}}",
+      "score_fail_mods": "{{- emoji}} ({{progress}}%) • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "details": "**{{pp}}pp →** {{ppFc}}pp if {{accuracyFc}} FC • **{{combo}}x**/{{maxCombo}}x\n**{{n300}}**x300 • **{{n100}}**x100 • **{{n50}}**x50 • **{{miss}}**xMiss",
+      "details_fc": "**{{pp}}pp →** **FC** • **{{combo}}x**/{{maxCombo}}x\n**{{n300}}**x300 • **{{n100}}**x100 • **{{n50}}**x50 • **{{miss}}**xMiss",
+      "infos": "Map informations",
+      "stats": "{{length}} • CS**{{cs}}** HP**{{hp}}** OD**{{od}}** AR**{{ar}}** • **{{bpm}}** BPM • **{{stars}} ★**",
+      "footer": "Mapped by {{author}} • {{approval}} on {{- approvalDate, MMM Do YYYY}}"
+   }
 }

@@ -1,3 +1,32 @@
 {
-   "associateSuccess": "Ton compte discord a bien été associé au pseudonyme \"{{username}}\" sur osu!"
+   "associateSuccess": "Ton compte discord a bien été associé au pseudonyme `{{username}}` sur osu!",
+   "noUsernameAssociated": "Tu n'as pas de pseudonyme osu associé à ton compte discord !",
+   "noRecentPlayFound": "Aucune partie récente n'a été trouvée pour le joueur `{{username}}` !",
+   "state": {
+      "graveyard": "Cimetière",
+      "wip": "WIP",
+      "pending": "En attente",
+      "ranked": "Classée",
+      "approved": "Approuvée",
+      "qualified": "Qualifiée",
+      "loved": "Loved"
+   },
+   "recent": {
+      "author": "{{player}} : {{ppUser}}pp | WR • #{{worldRank}} | {{country}} • #{{countryRank}}",
+      "title": "{{- artist}} - {{- title}} [{{- difficulty}}]",
+      "description": "",
+      "description_wr": "***Record mondial #{{worldIndex}}***",
+      "description_pb": "***Record personnel #{{bestIndex}}***",
+      "description_wr_pb": "***Record mondial #{{worldIndex}}*** • ***Record personnel #{{bestIndex}}***",
+      "score": "{{- emoji}} • {{score}} • {{accuracy}}% • {{date}}",
+      "score_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "score_wr_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "score_fail": "{{- emoji}} ({{progress}}%) • {{score}} • {{accuracy}}% • {{date}}",
+      "score_fail_mods": "{{- emoji}} ({{progress}}%) • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
+      "details": "**{{pp}}pp →** {{ppFc}}pp si {{accuracyFc}} FC • **{{combo}}x**/{{maxCombo}}x\n**{{n300}}**x300 • **{{n100}}**x100 • **{{n50}}**x50 • **{{miss}}**xMiss",
+      "details_fc": "**{{pp}}pp →** **FC** • **{{combo}}x**/{{maxCombo}}x\n**{{n300}}**x300 • **{{n100}}**x100 • **{{n50}}**x50 • **{{miss}}**xMiss",
+      "infos": "Informations sur la map",
+      "stats": "{{length}} • CS**{{cs}}** HP**{{hp}}** OD**{{od}}** AR**{{ar}}** • **{{bpm}}** BPM • **{{stars}} ★**",
+      "footer": "Mappé par {{author}} • {{approval}} le {{- approvalDate, Do MMM YYYY}}"
+   }
 }
