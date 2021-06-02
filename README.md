@@ -1,5 +1,7 @@
 # MattBotReborn
 
+[![CodeQL](https://github.com/matthieu-locussol/MattBotReborn/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/matthieu-locussol/MattBotReborn/actions/workflows/codeql-analysis.yml)
+
 ## Installation on server
 
 ```bash
