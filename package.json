@@ -20,7 +20,7 @@
    ],
    "dependencies": {
       "axios": "^0.21.1",
-      "chart.js": "2.9.3",
+      "chart.js": "2.9.4",
       "chartjs-node-canvas": "3.0.6",
       "child-process-promise": "^2.2.1",
       "discord.js": "https://github.com/discordjs/discord.js",
