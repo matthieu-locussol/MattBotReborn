@@ -65,4 +65,4 @@ jobs:
               username: ${{ secrets.USERNAME }}
               key: ${{ secrets.SSHKEY }}
               port: ${{ secrets.PORT }}
-              script: /usr/local/bin/pm2 startOrRestart ~/MattBotReborn/pm2.production.json
+              script: /usr/local/bin/pm2 --cwd ~/MattBotReborn startOrRestart ~/MattBotReborn/pm2.production.json
