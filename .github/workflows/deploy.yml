@@ -1,0 +1,41 @@
+name: Deploy
+on:
+   push:
+      branches:
+         - master
+
+jobs:
+   production:
+      name: Production
+      runs-on: ubuntu-latest
+      steps:
+         - name: Checkout source code
+           uses: actions/checkout@v2
+         - name: Load cache
+           uses: actions/cache@v2
+           with:
+              path: '**/node_modules'
+              key: ${{ runner.os }}-modules
+         - name: Install dependencies
+           run: npm install
+         - name: Build
+           run: npm run build
+         - name: Copy repository contents using SCP
+           uses: appleboy/scp-action@master
+           env:
+              HOST: ${{ secrets.HOST }}
+              USERNAME: ${{ secrets.USERNAME }}
+              PORT: ${{ secrets.PORT }}
+              KEY: ${{ secrets.SSHKEY }}
+           with:
+              source: 'build/.'
+              target: '~/MattBotReborn/'
+              overwrite: true
+         - name: Restart MattBot
+           uses: appleboy/ssh-action@master
+           with:
+              host: ${{ secrets.HOST }}
+              username: ${{ secrets.USERNAME }}
+              key: ${{ secrets.SSHKEY }}
+              port: ${{ secrets.PORT }}
+              script: /usr/local/bin/pm2 startOrRestart ~/MattBotReborn/pm2.config.json
