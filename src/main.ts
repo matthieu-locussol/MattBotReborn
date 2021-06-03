@@ -22,6 +22,6 @@ import { pingModule } from './modules/ping';
       await bot.run(process.env.DISCORD_TOKEN_PRODUCTION);
    }
 
-   await bot.populateCommandsGuild(process.env.DISCORD_GUILD_ID);
+   bot.populateCommandsGuild();
    bot.populateCommandsGlobal();
 })();

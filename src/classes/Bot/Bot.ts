@@ -84,21 +84,19 @@ export class Bot {
    }
 
    /**
-    * This method is used to refresh the existing slash commands for a guild given its id.
+    * This method is used to refresh the existing slash commands for a specific guild determined using the incoming message.
     *
     * It first delete the old slash commands, then it creates every single command again.
     *
     * *It is especially useful when one needs to delete an existing slash command and should
     * be called after the bot started up.*
-    * @param guildId The ID of the Guild you want to update the slash commands
     * @see populateCommandsGlobal
     * @see [See Discord documentation](https://discord.com/developers/docs/interactions/slash-commands#registering-a-command)
     */
-   async populateCommandsGuild(guildId: string) {
-      const guild = await this._client.guilds.fetch(guildId);
-
+   populateCommandsGuild() {
       this._client.on('message', async (message) => {
          if (message.content === '!POPULATE_GUILD') {
+            const guild = message.guild;
             logger.log({ id: 'LOG_Populate_Guild', guild: guild.name });
 
             if (sentByBotAdmin(message)) {
