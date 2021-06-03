@@ -50,7 +50,7 @@ jobs:
               key: ${{ secrets.SSHKEY }}
               port: ${{ secrets.PORT }}
               script: /usr/bin/git -C ~/MattBotReborn pull
-         - name: Installing new dependencies
+         - name: Install new dependencies
            uses: appleboy/ssh-action@master
            with:
               host: ${{ secrets.HOST }}
