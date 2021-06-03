@@ -11,7 +11,7 @@ import { top } from './subcommands/top';
 const osu: CommandFn = async (command) => {
    await initializeCache(command);
 
-   const subcommand = command.options[0];
+   const subcommand = command.options.array()[0];
 
    switch (subcommand.name) {
       case 'recent': {
