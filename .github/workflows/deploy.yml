@@ -42,6 +42,22 @@ jobs:
               source: 'pm2.production.json'
               target: '~/MattBotReborn/.'
               overwrite: true
+         - name: Pulling changes
+           uses: appleboy/ssh-action@master
+           with:
+              host: ${{ secrets.HOST }}
+              username: ${{ secrets.USERNAME }}
+              key: ${{ secrets.SSHKEY }}
+              port: ${{ secrets.PORT }}
+              script: /usr/bin/git -C ~/MattBotReborn pull
+         - name: Installing new dependencies
+           uses: appleboy/ssh-action@master
+           with:
+              host: ${{ secrets.HOST }}
+              username: ${{ secrets.USERNAME }}
+              key: ${{ secrets.SSHKEY }}
+              port: ${{ secrets.PORT }}
+              script: ~/.yarn/bin/yarn install --cwd ~/MattBotReborn
          - name: Restart MattBot
            uses: appleboy/ssh-action@master
            with:
