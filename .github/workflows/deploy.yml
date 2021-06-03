@@ -31,6 +31,17 @@ jobs:
               source: 'build/.'
               target: '~/MattBotReborn/'
               overwrite: true
+         - name: Copy PM2 configuration
+           uses: appleboy/scp-action@master
+           env:
+              HOST: ${{ secrets.HOST }}
+              USERNAME: ${{ secrets.USERNAME }}
+              PORT: ${{ secrets.PORT }}
+              KEY: ${{ secrets.SSHKEY }}
+           with:
+              source: 'pm2.production.json'
+              target: '~/MattBotReborn/.'
+              overwrite: true
          - name: Restart MattBot
            uses: appleboy/ssh-action@master
            with:
@@ -38,4 +49,4 @@ jobs:
               username: ${{ secrets.USERNAME }}
               key: ${{ secrets.SSHKEY }}
               port: ${{ secrets.PORT }}
-              script: /usr/local/bin/pm2 startOrRestart ~/MattBotReborn/pm2.config.json
+              script: /usr/local/bin/pm2 startOrRestart ~/MattBotReborn/pm2.production.json
