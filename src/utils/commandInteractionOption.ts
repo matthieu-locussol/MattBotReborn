@@ -1,14 +1,14 @@
-import { CommandInteractionOption } from 'discord.js';
+import { Collection, CommandInteractionOption } from 'discord.js';
 
-export const getStringOption = (options: CommandInteractionOption[], key: string) => {
+export const getStringOption = (options: Collection<string, CommandInteractionOption>, key: string) => {
    return options?.find((o) => o.name === key)?.value as string;
 };
 
-export const getIntegerOption = (options: CommandInteractionOption[], key: string) => {
+export const getIntegerOption = (options: Collection<string, CommandInteractionOption>, key: string) => {
    return options?.find((o) => o.name === key)?.value as number;
 };
 
-export const getBooleanOption = (options: CommandInteractionOption[], key: string) => {
+export const getBooleanOption = (options: Collection<string, CommandInteractionOption>, key: string) => {
    return options?.find((o) => o.name === key)?.value as boolean;
 };
 
@@ -17,18 +17,18 @@ export const getBooleanOption = (options: CommandInteractionOption[], key: strin
  * @param options The options you want to serialize
  * @returns The serialized options as a string
  */
-export const serializeOptions = (options?: CommandInteractionOption[]) => {
+export const serializeOptions = (options?: Collection<string, CommandInteractionOption>) => {
    let serializedOptions = '';
 
    if (options) {
-      for (const option of options) {
+      options.forEach((option) => {
          if (option.type === 'SUB_COMMAND') {
             const suboptions = serializeOptions(option.options);
             serializedOptions += ` ${option.name}${suboptions}`;
          } else {
             serializedOptions += ` ${option.value}`;
          }
-      }
+      });
    }
 
    return serializedOptions;

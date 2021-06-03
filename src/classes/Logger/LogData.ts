@@ -1,4 +1,4 @@
-import { CommandInteractionOption } from 'discord.js';
+import { Collection, CommandInteractionOption } from 'discord.js';
 
 export const LOG_RAW_LOG = 'LOG_Raw_Log';
 export const LOG_LOGGED_IN = 'LOG_Logged_In';
@@ -65,7 +65,7 @@ export type LogData =
    | {
         id: typeof LOG_RECEIVED_COMMAND;
         commandName: string;
-        options: CommandInteractionOption[];
+        options: Collection<string, CommandInteractionOption>;
         user: string;
         userId: string;
         channel: string;
