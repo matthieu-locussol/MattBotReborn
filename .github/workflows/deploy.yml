@@ -28,7 +28,7 @@ jobs:
               PORT: ${{ secrets.PORT }}
               KEY: ${{ secrets.SSHKEY }}
            with:
-              source: 'build/.'
+              source: 'assets/.,build/.,cache/.,logs/.'
               target: '~/MattBotReborn/'
               overwrite: true
          - name: Copy PM2 configuration
