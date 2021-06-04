@@ -20,7 +20,6 @@
       "description_wr_pb": "***Record mondial #{{worldIndex}}*** • ***Record personnel #{{bestIndex}}***",
       "score": "{{- emoji}} • {{score}} • {{accuracy}}% • {{date}}",
       "score_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
-      "score_wr_mods": "{{- emoji}} • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
       "score_fail": "{{- emoji}} ({{progress}}%) • {{score}} • {{accuracy}}% • {{date}}",
       "score_fail_mods": "{{- emoji}} ({{progress}}%) • **{{mods}}** • {{score}} • {{accuracy}}% • {{date}}",
       "details": "**{{pp}}pp →** {{ppFc}}pp si {{accuracyFc}} FC • **{{combo}}x**/{{maxCombo}}x\n**{{n300}}**x300 • **{{n100}}**x100 • **{{n50}}**x50 • **{{miss}}**xMiss",

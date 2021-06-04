@@ -18,7 +18,7 @@ export const getPp = async (score: OsuScore, beatmap: OsuBeatmap): Promise<OsuPp
    logger.log({ id: 'LOG_Osu_Pp_Computed' });
 
    const pp: OsuPp = {
-      fc: combo === maxCombo,
+      fc: results.pp === results.ppFc,
       pp: results.pp,
       ppFc: results.ppFc,
       accuracyFc: results.accuracyFc,

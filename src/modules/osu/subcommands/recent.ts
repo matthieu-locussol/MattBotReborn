@@ -60,7 +60,7 @@ const buildReply = (score: OsuRecentScore, guild: Guild) => {
          url: `https://osu.ppy.sh/users/${score.playerId}`,
       },
       title: t('recent.title', guild.id, options),
-      description: t('recent.description', guild.id, options),
+      description: t('recent.description', guild.id, { ...options, context: computeDescriptionContext(score) }),
       url: `https://osu.ppy.sh/beatmaps/${score.id}`,
       thumbnail: {
          url: `https://b.ppy.sh/thumb/${score.setId}l.jpg`,
@@ -70,8 +70,8 @@ const buildReply = (score: OsuRecentScore, guild: Guild) => {
       },
       fields: [
          {
-            name: t('recent.score', guild.id, options),
-            value: t('recent.details', guild.id, options),
+            name: t('recent.score', guild.id, { ...options, context: computeScoreContext(score) }),
+            value: t('recent.details', guild.id, { ...options, context: computeDetailsContext(score) }),
          },
          {
             name: t('recent.infos', guild.id),
@@ -89,23 +89,6 @@ const buildOptions = (score: OsuRecentScore, guild: Guild) => {
    const locale = bot.getLocale(guild.id);
    const stats = score.modsStats[score.modsBitset];
    const emoji = retrieveEmoji(guild, `Rank${score.rank}`);
-   const contexts: string[] = [];
-
-   if (score.worldIndex > 0) {
-      contexts.push('wr');
-   }
-
-   if (score.bestIndex > 0) {
-      contexts.push('pb');
-   }
-
-   if (score.rank.includes('F')) {
-      contexts.push('fail');
-   }
-
-   if (score.mods) {
-      contexts.push('mods');
-   }
 
    const options: TOptions<StringMap> = {
       ...score,
@@ -118,8 +101,45 @@ const buildOptions = (score: OsuRecentScore, guild: Guild) => {
       date: elapsedTime(score.date, locale),
       approval: formatApproval(score.approval, guild.id),
       approvalDate: new Date(score.approvalDate),
-      context: contexts.join('_'),
    };
 
    return options;
+};
+
+const computeDescriptionContext = (score: OsuRecentScore) => {
+   const contexts: string[] = [];
+
+   if (score.worldIndex > 0) {
+      contexts.push('wr');
+   }
+
+   if (score.bestIndex > 0) {
+      contexts.push('pb');
+   }
+
+   return contexts.join('_');
+};
+
+const computeScoreContext = (score: OsuRecentScore) => {
+   const contexts: string[] = [];
+
+   if (score.rank.includes('F')) {
+      contexts.push('fail');
+   }
+
+   if (score.mods) {
+      contexts.push('mods');
+   }
+
+   return contexts.join('_');
+};
+
+const computeDetailsContext = (score: OsuRecentScore) => {
+   const contexts: string[] = [];
+
+   if (score.fc) {
+      contexts.push('fc');
+   }
+
+   return contexts.join('_');
 };
