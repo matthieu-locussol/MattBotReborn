@@ -1,8 +1,9 @@
 # MattBotReborn
 
 [![CodeQL](https://github.com/matthieu-locussol/MattBotReborn/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/matthieu-locussol/MattBotReborn/actions/workflows/codeql-analysis.yml)
+[![Deploy](https://github.com/matthieu-locussol/MattBotReborn/actions/workflows/deploy.yml/badge.svg)](https://github.com/matthieu-locussol/MattBotReborn/actions/workflows/deploy.yml)
 
-## Installation on server
+## Installation instructions
 
 ```bash
 yarn install
