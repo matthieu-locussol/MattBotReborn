@@ -21,14 +21,15 @@ export const getScores = async (beatmapId: string, username?: string, limit = 10
 };
 
 export const getUserScore = async (score: OsuScore, username: string): Promise<OsuRecentScore> => {
-   const beatmap = await getBeatmap(score.id);
+   logger.log({ id: 'LOG_Osu_Retrieving_User_Score', beatmapId: score.id, username });
 
-   const [user, pp, userBestScores, beatmapBestScores] = await Promise.all([
+   const [beatmap, user, userBestScores] = await Promise.all([
+      getBeatmap(score.id),
       getUser(username),
-      getPp(score, beatmap),
       getBests(username),
-      getScores(beatmap.id),
    ]);
+
+   const [pp, beatmapBestScores] = await Promise.all([getPp(score, beatmap), getScores(beatmap.id)]);
 
    const recentScore = parseRecent(score, beatmap, user, pp, userBestScores, beatmapBestScores);
    return recentScore;

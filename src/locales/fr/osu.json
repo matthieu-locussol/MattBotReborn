@@ -2,6 +2,7 @@
    "associateSuccess": "Ton compte discord a bien été associé au pseudonyme `{{username}}` sur osu!",
    "noUsernameAssociated": "Tu n'as pas de pseudonyme osu associé à ton compte discord !",
    "noRecentPlayFound": "Aucune partie récente n'a été trouvée pour le joueur `{{username}}` !",
+   "noUserScoreFound": "Aucun top play n'a été trouvé pour le joueur `{{username}}` sur la map `{{id}}` !",
    "state": {
       "graveyard": "Cimetière",
       "wip": "WIP",

@@ -2,6 +2,7 @@
    "associateSuccess": "Your discord account has been associated to the `{{username}}` nickname on osu!",
    "noUsernameAssociated": "You don't have any osu nickname associated to your discord account!",
    "noRecentPlayFound": "Could not find any recent play for the player `{{username}}`!",
+   "noUserScoreFound": "No best play has been found for the player `{{username}}` on the beatmap `{{id}}`!",
    "state": {
       "graveyard": "Graveyard",
       "wip": "WIP",

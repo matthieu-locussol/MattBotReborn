@@ -1,5 +1,6 @@
 import { CommandInteraction } from 'discord.js';
 import { osuModule } from '..';
+import { logger } from '../../../client';
 import { extractCommandInfos } from '../../../utils/commandInteraction';
 import { getScores, getUserScore } from '../api/entities/scores';
 import { OsuScore } from '../api/types';
@@ -20,9 +21,14 @@ export const beatmap = async (command: CommandInteraction, id: number, username?
          ...scores[0],
          id: `${id}`,
       };
-      const userScore = await getUserScore(score, username);
 
-      command.editReply(buildRecentReply(userScore, command.guild));
+      if (scores.length > 0) {
+         const userScore = await getUserScore(score, username);
+         command.editReply(buildRecentReply(userScore, command.guild));
+      } else {
+         logger.log({ id: 'LOG_Osu_User_Score_Not_Found', beatmapId: score.id, username });
+         command.editReply(t('noUserScoreFound', guildId, { id, username }));
+      }
    } else {
       command.editReply(t('noUsernameAssociated', guildId));
    }

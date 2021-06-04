@@ -179,6 +179,12 @@ export class Logger {
          case 'LOG_Osu_Beatmap_Chart_Cached': {
             return `--- Chart ${data.filename} has been generated and cached!`;
          }
+         case 'LOG_Osu_Retrieving_User_Score': {
+            return `--- Retrieving best score on the beatmap ${data.beatmapId} for the username ${data.username}...`;
+         }
+         case 'LOG_Osu_User_Score_Not_Found': {
+            return `--- Could not find the best score on the beatmap ${data.beatmapId} for the username ${data.username}!`;
+         }
       }
    }
 }
