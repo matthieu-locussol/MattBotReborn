@@ -145,10 +145,18 @@ export class Logger {
             return `--- PP for the score have been computed!`;
          }
          case 'LOG_Osu_Retrieving_Scores': {
-            return `--- Retrieving the osu! ${data.limit} best scores on the beatmap ${data.beatmapId}...`;
+            if (data.username) {
+               return `--- Retrieving the osu! ${data.limit} best scores for the user ${data.username} on the beatmap ${data.beatmapId}...`;
+            } else {
+               return `--- Retrieving the osu! ${data.limit} best scores on the beatmap ${data.beatmapId}...`;
+            }
          }
          case 'LOG_Osu_Scores_Found': {
-            return `--- Found ${data.count} osu! best scores on the beatmap ${data.beatmapId}!`;
+            if (data.username) {
+               return `--- Found ${data.count} osu! best scores for the user ${data.username} on the beatmap ${data.beatmapId}!`;
+            } else {
+               return `--- Found ${data.count} osu! best scores on the beatmap ${data.beatmapId}!`;
+            }
          }
          case 'LOG_Osu_Retrieving_Beatmap_File': {
             return `--- Downloading beatmap file for beatmap ${data.beatmapId} using curl...`;

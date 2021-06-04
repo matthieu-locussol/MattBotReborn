@@ -22,6 +22,7 @@ const osu: CommandFn = async (command) => {
          break;
       }
       case 'beatmap': {
+         await command.defer();
          const id = getIntegerOption(subcommand.options, 'id');
          const username = getStringOption(subcommand.options, 'username');
          beatmap(command, id, username);

@@ -9,22 +9,21 @@ import { clamp, elapsedTime, formatNumberSeparators } from '../../../utils/utils
 import { getRecentScore } from '../api/entities/recent';
 import { OsuRecentScore } from '../api/types';
 import { COLORS } from '../constants';
-import { formatAccuracy, formatApproval, formatDuration, formatModsChart, formatStars } from '../utils';
+import {
+   formatAccuracy,
+   formatApproval,
+   formatDuration,
+   formatModsChart,
+   formatStars,
+   getDefaultUsername,
+} from '../utils';
 
 export const recent = async (command: CommandInteraction, username?: string, index = 1) => {
    const t = osuModule.t;
    const { userId, guildId } = extractCommandInfos(command);
 
    if (!username) {
-      logger.log({ id: 'LOG_Osu_Recent_Get_Username_From_Cache' });
-
-      const cache = await osuModule.cache.get(guildId);
-      username = cache.associations[userId];
-
-      if (username === undefined) {
-         logger.log({ id: 'LOG_Osu_Recent_No_Username_Matching' });
-         command.editReply(t('noUsernameAssociated', guildId));
-      }
+      username = await getDefaultUsername(userId, guildId);
    }
 
    if (username) {
@@ -37,15 +36,17 @@ export const recent = async (command: CommandInteraction, username?: string, ind
       const score = await getRecentScore(username, limit);
 
       if (score) {
-         command.editReply(buildReply(score, command.guild));
+         command.editReply(buildRecentReply(score, command.guild));
       } else {
          logger.log({ id: 'LOG_Osu_Recent_Not_Found', username });
          command.editReply(t('noRecentPlayFound', guildId, { username }));
       }
+   } else {
+      command.editReply(t('noUsernameAssociated', guildId));
    }
 };
 
-const buildReply = (score: OsuRecentScore, guild: Guild) => {
+export const buildRecentReply = (score: OsuRecentScore, guild: Guild) => {
    const t = osuModule.t;
    const locale = bot.getLocale(guild.id);
    const options = buildOptions(score, guild);

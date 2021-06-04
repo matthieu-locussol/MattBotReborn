@@ -204,11 +204,13 @@ export type LogData =
    | {
         id: typeof LOG_OSU_RETRIEVING_SCORES;
         beatmapId: string;
+        username?: string;
         limit: number;
      }
    | {
         id: typeof LOG_OSU_SCORES_FOUND;
         beatmapId: string;
+        username?: string;
         count: number;
      }
    | {

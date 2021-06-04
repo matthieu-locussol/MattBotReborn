@@ -1,5 +1,6 @@
 import { Score } from 'node-osu';
 import { osuModule } from '.';
+import { logger } from '../../client';
 import { OsuBeatmap, OsuScore } from './api/types';
 import { BEATMAP_STATE, MODS } from './constants';
 
@@ -132,4 +133,17 @@ export const computeWorldBest = (score: OsuScore, beatmapScores: OsuScore[]) => 
    const scoreIndex = itemExists ? itemIndex + 1 : 0;
 
    return scoreIndex;
+};
+
+export const getDefaultUsername = async (userId: string, guildId: string) => {
+   logger.log({ id: 'LOG_Osu_Recent_Get_Username_From_Cache' });
+
+   const cache = await osuModule.cache.get(guildId);
+   const username = cache.associations[userId];
+
+   if (username === undefined) {
+      logger.log({ id: 'LOG_Osu_Recent_No_Username_Matching' });
+   }
+
+   return username;
 };
