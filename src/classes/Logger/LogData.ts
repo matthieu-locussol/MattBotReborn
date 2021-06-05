@@ -45,6 +45,8 @@ export const LOG_OSU_BEATMAP_CHART_RENDERING = 'LOG_Osu_Beatmap_Chart_Rendering'
 export const LOG_OSU_BEATMAP_CHART_CACHED = 'LOG_Osu_Beatmap_Chart_Cached';
 export const LOG_OSU_RETRIEVING_USER_SCORE = 'LOG_Osu_Retrieving_User_Score';
 export const LOG_OSU_USER_SCORE_NOT_FOUND = 'LOG_Osu_User_Score_Not_Found';
+export const LOG_OSU_BESTS_CLAMPED = 'LOG_Osu_Bests_Clamped';
+export const LOG_OSU_BESTS_NEVER_PLAYED = 'LOG_Osu_Bests_Never_Played';
 
 export type LogData =
    | {
@@ -256,4 +258,13 @@ export type LogData =
         id: typeof LOG_OSU_USER_SCORE_NOT_FOUND;
         username: string;
         beatmapId: string;
+     }
+   | {
+        id: typeof LOG_OSU_BESTS_CLAMPED;
+        count: number;
+        limit: number;
+     }
+   | {
+        id: typeof LOG_OSU_BESTS_NEVER_PLAYED;
+        username: string;
      };

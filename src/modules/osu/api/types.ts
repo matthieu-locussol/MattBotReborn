@@ -1,5 +1,6 @@
 export type OsuScore = {
    id: string;
+   pp: string;
    rank: string;
    playerId: string;
    date: string | Date;
@@ -23,6 +24,13 @@ export type OsuRecentScore = OsuScore &
       progress: number;
       modsBitset: string;
    };
+
+export type OsuBestScores = OsuUser & {
+   scores: {
+      score: OsuScore;
+      beatmap: OsuBeatmap;
+   }[];
+};
 
 export type OsuBeatmapDifficulty = {
    cs: number;

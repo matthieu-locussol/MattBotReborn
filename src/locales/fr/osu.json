@@ -3,6 +3,7 @@
    "noUsernameAssociated": "Tu n'as pas de pseudonyme osu associé à ton compte discord !",
    "noRecentPlayFound": "Aucune partie récente n'a été trouvée pour le joueur `{{username}}` !",
    "noUserScoreFound": "Aucun top play n'a été trouvé pour le joueur `{{username}}` sur la map `{{id}}` !",
+   "noPlayFound": "Aucun play n'a été trouvé pour le joueur `{{username}}` !",
    "state": {
       "graveyard": "Cimetière",
       "wip": "WIP",
@@ -28,5 +29,12 @@
       "infos": "Informations sur la map",
       "stats": "{{length}} • CS**{{cs}}** HP**{{hp}}** OD**{{od}}** AR**{{ar}}** • **{{bpm}}** BPM • **{{stars}} ★**",
       "footer": "Mappé par {{author}} • {{approval}} le {{- approvalDate, Do MMM YYYY}}"
+   },
+   "top": {
+      "author": "{{player}} : {{ppUser}}pp | WR • #{{worldRank}} | {{country}} • #{{countryRank}}",
+      "name": "{{- emoji}} • {{- title}}",
+      "name_mods": "{{- emoji}} • **{{mods}}** • {{- title}}",
+      "value": "**{{pp}}pp** • {{accuracy}}% • [[{{- difficulty}}]]({{url}}) • {{date}}",
+      "footer": "MattBot par Matthieu Locussol"
    }
 }

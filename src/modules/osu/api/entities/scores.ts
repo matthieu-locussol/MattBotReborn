@@ -2,7 +2,7 @@ import { Score } from 'node-osu';
 import { logger } from '../../../../client';
 import { computeAccuracy, formatMods } from '../../utils';
 import { osuApi } from '../api';
-import { OsuRecentScore, OsuScore } from '../types';
+import { OsuBestScores, OsuRecentScore, OsuScore } from '../types';
 import { getBeatmap } from './beatmap';
 import { getBests } from './best';
 import { getPp } from './pp';
@@ -35,9 +35,25 @@ export const getUserScore = async (score: OsuScore, username: string): Promise<O
    return recentScore;
 };
 
+export const getBestScores = async (username: string, count: number): Promise<OsuBestScores> => {
+   const [user, scores] = await Promise.all([getUser(username), getBests(username, count)]);
+   const beatmaps = await Promise.all(scores.map((score) => getBeatmap(score.id)));
+
+   const bestScores: OsuBestScores = {
+      ...user,
+      scores: scores.map((score, id) => ({
+         score,
+         beatmap: beatmaps[id],
+      })),
+   };
+
+   return bestScores;
+};
+
 export const parseScore = (score: Score): OsuScore => {
    const osuScore: OsuScore = {
       id: `${score.beatmapId}`,
+      pp: `${score.pp}`,
       rank: score.rank,
       playerId: score.user.id,
       date: score.date,

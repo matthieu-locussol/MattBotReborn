@@ -29,6 +29,7 @@ const osu: CommandFn = async (command) => {
          break;
       }
       case 'top': {
+         await command.defer();
          const username = getStringOption(subcommand.options, 'username');
          const count = getIntegerOption(subcommand.options, 'count');
          top(command, username, count);

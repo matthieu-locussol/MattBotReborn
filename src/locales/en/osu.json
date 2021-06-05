@@ -3,6 +3,7 @@
    "noUsernameAssociated": "You don't have any osu nickname associated to your discord account!",
    "noRecentPlayFound": "Could not find any recent play for the player `{{username}}`!",
    "noUserScoreFound": "No best play has been found for the player `{{username}}` on the beatmap `{{id}}`!",
+   "noPlayFound": "No play has been found for the player `{{username}}`!",
    "state": {
       "graveyard": "Graveyard",
       "wip": "WIP",
@@ -28,5 +29,12 @@
       "infos": "Map informations",
       "stats": "{{length}} • CS**{{cs}}** HP**{{hp}}** OD**{{od}}** AR**{{ar}}** • **{{bpm}}** BPM • **{{stars}} ★**",
       "footer": "Mapped by {{author}} • {{approval}} on {{- approvalDate, MMM Do YYYY}}"
+   },
+   "top": {
+      "author": "{{player}}: {{ppUser}}pp | WR • #{{worldRank}} | {{country}} • #{{countryRank}}",
+      "name": "{{- emoji}} • {{- title}}",
+      "name_mods": "{{- emoji}} • **{{mods}}** • {{- title}}",
+      "value": "**{{pp}}pp** • {{accuracy}}% • [[{{- difficulty}}]]({{url}}) • {{date}}",
+      "footer": "MattBot by Matthieu Locussol"
    }
 }

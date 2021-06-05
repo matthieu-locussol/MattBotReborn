@@ -1,5 +1,5 @@
-import { ApplicationCommandData, Client, CommandInteraction, Intents } from 'discord.js';
-import { readFileSync, writeFileSync, statSync } from 'fs';
+import { ApplicationCommandData, Client, CommandInteraction, Intents, MessageComponentInteraction } from 'discord.js';
+import { readFileSync, statSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { logger } from '../../client';
 import type { Module } from '../../modules/Module';
@@ -73,7 +73,13 @@ export class Bot {
       const index = this._commands.findIndex((c) => c.name === module.command.name);
       if (index === -1) {
          this._commands.push(module.command);
-         this.onCommand(module.command.name, permissionWrapper(module.command.fn, module));
+         this._onCommand(module.command.name, permissionWrapper(module.command.fn, module));
+
+         if (module.ui) {
+            for (const [id, fn] of Object.entries(module.ui)) {
+               this._onMessageComponent(id, fn);
+            }
+         }
       } else {
          logger.error({
             id: 'LOG_Module_Command_Duplicate',
@@ -163,7 +169,7 @@ export class Bot {
     * @param name The name of the slash command (as defined in a Module)
     * @param fn The function to execute when the slash command is called
     */
-   private onCommand(name: string, fn: (command: CommandInteraction) => void) {
+   private _onCommand(name: string, fn: (command: CommandInteraction) => void) {
       this._client.on('interaction', (interaction) => {
          const userCommand = interaction;
 
@@ -181,6 +187,21 @@ export class Bot {
          }
       });
    }
+
+   /**
+    * Listens for events on the `MessageComponent` associated to the `customId` and fires `fn` when an event is caught.
+    * @param customId The id of the component you want to listen to
+    * @param fn The function to fire when an event is caught
+    */
+   private _onMessageComponent = (customId: string, fn: (interaction: MessageComponentInteraction) => void) => {
+      this._client.on('interaction', (interaction) => {
+         if (interaction.isMessageComponent()) {
+            if (interaction.customID === customId) {
+               fn(interaction);
+            }
+         }
+      });
+   };
 
    /**
     *

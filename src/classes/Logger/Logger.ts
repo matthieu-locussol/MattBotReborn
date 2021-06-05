@@ -185,6 +185,12 @@ export class Logger {
          case 'LOG_Osu_User_Score_Not_Found': {
             return `--- Could not find the best score on the beatmap ${data.beatmapId} for the username ${data.username}!`;
          }
+         case 'LOG_Osu_Bests_Clamped': {
+            return `--- Count ${data.count} has been clamped to ${data.limit} because it was out of range`;
+         }
+         case 'LOG_Osu_Bests_Never_Played': {
+            return `--- Could not find any plays for the username ${data.username}!`;
+         }
       }
    }
 }

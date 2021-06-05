@@ -1,4 +1,4 @@
-import { ApplicationCommandData, CommandInteraction } from 'discord.js';
+import { ApplicationCommandData, CommandInteraction, MessageComponentInteraction } from 'discord.js';
 import { StringMap } from 'i18next';
 import KeyvFile from 'keyv-file';
 import { resolve } from 'path';
@@ -23,6 +23,7 @@ export type Module<T = unknown> = {
    blacklist?: PermissionList;
    whitelist?: PermissionList;
    t?: TranslationFunction<StringMap>;
+   ui?: Record<string, (interaction: MessageComponentInteraction) => void>;
 };
 
 /**

@@ -25,6 +25,7 @@ export const initializeLocales = () =>
    i18next.init({
       resources,
       interpolation: {
+         escapeValue: false,
          format: function (value, format, lang) {
             if (value instanceof Date) {
                if (format) {
