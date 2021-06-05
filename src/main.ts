@@ -6,6 +6,7 @@ dotenv.config({ path: resolve(__dirname, '../.env') });
 import { bot } from './client';
 import { initializeLocales } from './locales';
 import { langModule } from './modules/lang';
+import { musicModule } from './modules/music';
 import { osuModule } from './modules/osu';
 import { pingModule } from './modules/ping';
 
@@ -15,6 +16,7 @@ import { pingModule } from './modules/ping';
    bot.addModule(langModule);
    bot.addModule(pingModule);
    bot.addModule(osuModule);
+   bot.addModule(musicModule);
 
    if (process.env.NODE_ENV === 'development') {
       await bot.run(process.env.DISCORD_TOKEN_DEVELOPMENT);
