@@ -1,4 +1,11 @@
-import { ApplicationCommandData, Client, CommandInteraction, Intents, MessageComponentInteraction } from 'discord.js';
+import {
+   ApplicationCommandData,
+   Client,
+   CommandInteraction,
+   Intents,
+   Message,
+   MessageComponentInteraction,
+} from 'discord.js';
 import { readFileSync, statSync, writeFileSync } from 'fs';
 import { resolve } from 'path';
 import { logger } from '../../client';
@@ -14,7 +21,7 @@ export class Bot {
 
    constructor() {
       this._client = new Client({
-         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+         intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_VOICE_STATES],
       });
       this._locales = this._loadLocales();
 
@@ -78,6 +85,12 @@ export class Bot {
          if (module.ui) {
             for (const [id, fn] of Object.entries(module.ui)) {
                this._onMessageComponent(id, fn);
+            }
+         }
+
+         if (module.listeners) {
+            for (const listener of module.listeners) {
+               this._onMessage(listener);
             }
          }
       } else {
@@ -200,6 +213,16 @@ export class Bot {
                fn(interaction);
             }
          }
+      });
+   };
+
+   /**
+    * Wrapper around the `Client`.`on` method to listen to an incoming `Message`.
+    * @param fn The function to fire when a message is caught
+    */
+   private _onMessage = (fn: (message: Message) => Awaited<void>) => {
+      this._client.on('message', (message) => {
+         fn(message);
       });
    };
 
