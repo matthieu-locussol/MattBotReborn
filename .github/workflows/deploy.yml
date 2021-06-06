@@ -20,7 +20,7 @@ jobs:
            run: npm install
          - name: Build
            run: npm run build
-         - name: Copy repository contents using SCP
+         - name: Copy build using SCP
            uses: appleboy/scp-action@master
            env:
               HOST: ${{ secrets.HOST }}
@@ -28,19 +28,8 @@ jobs:
               PORT: ${{ secrets.PORT }}
               KEY: ${{ secrets.SSHKEY }}
            with:
-              source: 'assets/.,build/.,cache/.,logs/.'
+              source: 'build/.'
               target: '~/MattBotReborn/'
-              overwrite: true
-         - name: Copy PM2 configuration
-           uses: appleboy/scp-action@master
-           env:
-              HOST: ${{ secrets.HOST }}
-              USERNAME: ${{ secrets.USERNAME }}
-              PORT: ${{ secrets.PORT }}
-              KEY: ${{ secrets.SSHKEY }}
-           with:
-              source: 'pm2.production.json'
-              target: '~/MattBotReborn/.'
               overwrite: true
          - name: Pulling changes
            uses: appleboy/ssh-action@master
@@ -58,7 +47,7 @@ jobs:
               key: ${{ secrets.SSHKEY }}
               port: ${{ secrets.PORT }}
               script: ~/.yarn/bin/yarn install --cwd ~/MattBotReborn
-         - name: Restart MattBot
+         - name: Reload MattBot
            uses: appleboy/ssh-action@master
            with:
               host: ${{ secrets.HOST }}
