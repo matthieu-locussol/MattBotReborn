@@ -11,11 +11,11 @@ jobs:
       steps:
          - name: Checkout source code
            uses: actions/checkout@v2
-         # - name: Load cache
-         #   uses: actions/cache@v2
-         #   with:
-         #      path: '**/node_modules'
-         #      key: ${{ runner.os }}-modules
+         - name: Load cache
+           uses: actions/cache@v2
+           with:
+              path: '**/node_modules'
+              key: ${{ runner.os }}-modules
          - name: Install dependencies
            run: npm install
          - name: Build
@@ -31,27 +31,14 @@ jobs:
               source: 'build/.'
               target: '~/MattBotReborn/'
               overwrite: true
-         - name: Pulling changes
+         - name: Pulling changes & reloading MattBot
            uses: appleboy/ssh-action@master
            with:
               host: ${{ secrets.HOST }}
               username: ${{ secrets.USERNAME }}
               key: ${{ secrets.SSHKEY }}
               port: ${{ secrets.PORT }}
-              script: /usr/bin/git -C ~/MattBotReborn pull
-         - name: Install new dependencies
-           uses: appleboy/ssh-action@master
-           with:
-              host: ${{ secrets.HOST }}
-              username: ${{ secrets.USERNAME }}
-              key: ${{ secrets.SSHKEY }}
-              port: ${{ secrets.PORT }}
-              script: ~/.yarn/bin/yarn install --cwd ~/MattBotReborn
-         - name: Reload MattBot
-           uses: appleboy/ssh-action@master
-           with:
-              host: ${{ secrets.HOST }}
-              username: ${{ secrets.USERNAME }}
-              key: ${{ secrets.SSHKEY }}
-              port: ${{ secrets.PORT }}
-              script: /usr/local/bin/pm2 reload "MattBotReborn - Production"
+              script: |
+                 /usr/bin/git -C ~/MattBotReborn pull
+                 ~/.yarn/bin/yarn install --cwd ~/MattBotReborn
+                 /usr/local/bin/pm2 reload "MattBotReborn - Production"
