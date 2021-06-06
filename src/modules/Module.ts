@@ -1,4 +1,10 @@
-import { ApplicationCommandData, CommandInteraction, MessageComponentInteraction } from 'discord.js';
+import {
+   ApplicationCommandData,
+   ClientEvents,
+   CommandInteraction,
+   Message,
+   MessageComponentInteraction,
+} from 'discord.js';
 import { StringMap } from 'i18next';
 import KeyvFile from 'keyv-file';
 import { resolve } from 'path';
@@ -16,6 +22,11 @@ export type PermissionList = {
    users?: string[];
 };
 
+export type EventListener<K extends keyof ClientEvents> = {
+   event: K;
+   listener: (...args: ClientEvents[K]) => Awaited<void>;
+};
+
 export type Module<T = unknown> = {
    cache?: Keyv<T>;
    command: Command;
@@ -24,6 +35,7 @@ export type Module<T = unknown> = {
    whitelist?: PermissionList;
    t?: TranslationFunction<StringMap>;
    ui?: Record<string, (interaction: MessageComponentInteraction) => void>;
+   listeners?: ((message: Message) => Awaited<void>)[];
 };
 
 /**

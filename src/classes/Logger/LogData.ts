@@ -47,6 +47,23 @@ export const LOG_OSU_RETRIEVING_USER_SCORE = 'LOG_Osu_Retrieving_User_Score';
 export const LOG_OSU_USER_SCORE_NOT_FOUND = 'LOG_Osu_User_Score_Not_Found';
 export const LOG_OSU_BESTS_CLAMPED = 'LOG_Osu_Bests_Clamped';
 export const LOG_OSU_BESTS_NEVER_PLAYED = 'LOG_Osu_Bests_Never_Played';
+export const LOG_MUSIC_NO_VOICE_CHANNEL = 'LOG_Music_No_Voice_Channel';
+export const LOG_MUSIC_CHANGED_VOICE_CHANNEL = 'LOG_Music_Changed_Voice_Channel';
+export const LOG_MUSIC_VOICE_CONNECTING = 'LOG_Music_Voice_Connecting';
+export const LOG_MUSIC_PLAYING_SONG = 'LOG_Music_Playing_Song';
+export const LOG_MUSIC_NO_VOICE_CONNECTION_FOUND = 'LOG_Music_No_Voice_Connection_Found';
+export const LOG_MUSIC_PLAY_COMMAND = 'LOG_Music_Play_Command';
+export const LOG_MUSIC_LISTENER_YOUTUBE = 'LOG_Music_Listener_Youtube';
+export const LOG_MUSIC_RESUMING_SONG = 'LOG_Music_Resuming_Song';
+export const LOG_MUSIC_PAUSE_COMMAND = 'LOG_Music_Pause_Command';
+export const LOG_MUSIC_STOP_COMMAND = 'LOG_Music_Stop_Command';
+export const LOG_MUSIC_NO_SONG_PLAYING = 'LOG_Music_No_Song_Playing';
+export const LOG_MUSIC_PAUSING_SOUND = 'LOG_Music_Pausing_Song';
+export const LOG_MUSIC_DISCONNECTED = 'LOG_Music_Disconnected';
+export const LOG_MUSIC_DISPATCHER_ENDED = 'LOG_Music_Dispatcher_Ended';
+export const LOG_MUSIC_CACHING_VOLUME = 'LOG_Music_Caching_Volume';
+export const LOG_MUSIC_PLAYED_VOLUME = 'LOG_Music_Played_Volume';
+export const LOG_MUSIC_VOLUMEDOWN_COMMAND = 'LOG_Music_VolumeDown_Command';
 
 export type LogData =
    | {
@@ -267,4 +284,77 @@ export type LogData =
    | {
         id: typeof LOG_OSU_BESTS_NEVER_PLAYED;
         username: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_NO_VOICE_CHANNEL;
+        guild: string;
+        username: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_CHANGED_VOICE_CHANNEL;
+        guild: string;
+        oldChannel: string;
+        newChannel: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_VOICE_CONNECTING;
+        guild: string;
+        channel: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_PLAYING_SONG;
+     }
+   | {
+        id: typeof LOG_MUSIC_NO_VOICE_CONNECTION_FOUND;
+        guild: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_PLAY_COMMAND;
+        username: string;
+        songUrl: string;
+        guild: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_LISTENER_YOUTUBE;
+        username: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_RESUMING_SONG;
+     }
+   | {
+        id: typeof LOG_MUSIC_PAUSE_COMMAND;
+        username: string;
+        guild: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_STOP_COMMAND;
+        username: string;
+        guild: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_NO_SONG_PLAYING;
+        guild: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_PAUSING_SOUND;
+     }
+   | {
+        id: typeof LOG_MUSIC_DISCONNECTED;
+     }
+   | {
+        id: typeof LOG_MUSIC_DISPATCHER_ENDED;
+     }
+   | {
+        id: typeof LOG_MUSIC_CACHING_VOLUME;
+        volume: number;
+        guild: string;
+     }
+   | {
+        id: typeof LOG_MUSIC_PLAYED_VOLUME;
+        volume: number;
+     }
+   | {
+        id: typeof LOG_MUSIC_VOLUMEDOWN_COMMAND;
+        username: string;
+        guild: string;
      };

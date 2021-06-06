@@ -1,1 +1,6 @@
-{}
+{
+   "commandRan": "You ran the comand `{{name}}`!",
+   "notConnectedVoiceChannel": "You are not connected to a voice channel!",
+   "botNotConnectedVoiceChannel": "MattBot is not connected to a voice channel!",
+   "noMusicBeingPlayed": "No song is currently being played!"
+}

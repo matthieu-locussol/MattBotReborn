@@ -2,20 +2,24 @@ import i18next, { StringMap, TFunctionKeys, TFunctionResult, TOptions } from 'i1
 import moment from 'moment';
 import { bot } from '../client';
 import langEn from './en/lang.json';
+import musicEn from './en/music.json';
 import osuEn from './en/osu.json';
 import pingEn from './en/ping.json';
 import langFr from './fr/lang.json';
+import musicFr from './fr/music.json';
 import osuFr from './fr/osu.json';
 import pingFr from './fr/ping.json';
 
 const resources = {
    fr: {
       lang: langFr,
+      music: musicFr,
       osu: osuFr,
       ping: pingFr,
    },
    en: {
       lang: langEn,
+      music: musicEn,
       osu: osuEn,
       ping: pingEn,
    },

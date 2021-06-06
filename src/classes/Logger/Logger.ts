@@ -191,6 +191,57 @@ export class Logger {
          case 'LOG_Osu_Bests_Never_Played': {
             return `--- Could not find any plays for the username ${data.username}!`;
          }
+         case 'LOG_Music_No_Voice_Channel': {
+            return `--- Could not join a voice channel: ${data.username} is not in a voice channel (server ${data.guild})!`;
+         }
+         case 'LOG_Music_Changed_Voice_Channel': {
+            return `--- MattBot changed from voice channel "${data.oldChannel}" to "${data.newChannel}" (server ${data.guild})!`;
+         }
+         case 'LOG_Music_Voice_Connecting': {
+            return `--- Connecting to channel ${data.channel} (server ${data.guild})...`;
+         }
+         case 'LOG_Music_Playing_Song': {
+            return `--- Playing song...`;
+         }
+         case 'LOG_Music_No_Voice_Connection_Found': {
+            return `--- No existing connection found in server ${data.guild}!`;
+         }
+         case 'LOG_Music_Play_Command': {
+            return `User ${data.username} triggered the play command for the song ${data.songUrl} in the server ${data.guild}`;
+         }
+         case 'LOG_Music_Listener_Youtube': {
+            return `--- User ${data.username} sent a YouTube link, it has been converted to handle Discord interactions`;
+         }
+         case 'LOG_Music_Resuming_Song': {
+            return `--- Resuming song...`;
+         }
+         case 'LOG_Music_Pause_Command': {
+            return `User ${data.username} triggered the pause command in the server ${data.guild}`;
+         }
+         case 'LOG_Music_Stop_Command': {
+            return `User ${data.username} triggered the stop command in the server ${data.guild}`;
+         }
+         case 'LOG_Music_No_Song_Playing': {
+            return `--- No song is currently being played in the server ${data.guild}!`;
+         }
+         case 'LOG_Music_Pausing_Song': {
+            return `--- Pausing song...`;
+         }
+         case 'LOG_Music_Disconnected': {
+            return `--- MattBot successfully disconnected from the voice channel`;
+         }
+         case 'LOG_Music_Dispatcher_Ended': {
+            return `--- Stream dispatcher has ended`;
+         }
+         case 'LOG_Music_Caching_Volume': {
+            return `--- Caching the new volume for server ${data.guild}: ${data.volume}/10`;
+         }
+         case 'LOG_Music_Played_Volume': {
+            return `--- Updated the volume of the song being played to ${data.volume}/10`;
+         }
+         case 'LOG_Music_VolumeDown_Command': {
+            return `User ${data.username} triggered the volumeDown command in the server ${data.guild}`;
+         }
       }
    }
 }
