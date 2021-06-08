@@ -1,7 +1,8 @@
+import { CommandInteraction } from 'discord.js';
 import { logger } from '../../client';
 import { buildTranslationFunction } from '../../locales';
 import { getStringOption } from '../../utils/commandInteractionOption';
-import { buildCache, CommandFn, Module } from '../Module';
+import { buildCache, Module } from '../Module';
 import { MusicModuleCache } from './cache';
 import { youtubeLinkListener } from './listeners';
 import { pause } from './subcommands/pause';
@@ -15,7 +16,7 @@ import { handleStop } from './ui/stopButton';
 import { handleVolumeDown } from './ui/volumeDownButton';
 import { handleVolumeUp } from './ui/volumeUpButton';
 
-const music: CommandFn = async (command) => {
+const music = async (command: CommandInteraction) => {
    const subcommand = command.options.array()[0];
 
    switch (subcommand.name) {
@@ -115,4 +116,7 @@ export const musicModule: Module<MusicModuleCache> = {
       music_volumeUp: handleVolumeUp,
    },
    listeners: [youtubeLinkListener],
+   whitelist: {
+      channels: ['playlists'],
+   },
 };

@@ -1,14 +1,15 @@
+import { CommandInteraction } from 'discord.js';
 import { logger } from '../../client';
 import { buildTranslationFunction } from '../../locales';
 import { getIntegerOption, getStringOption } from '../../utils/commandInteractionOption';
-import { buildCache, CommandFn, Module } from '../Module';
+import { buildCache, Module } from '../Module';
 import { initializeCache, OsuModuleCache } from './cache';
 import { associate } from './subcommands/associate';
 import { beatmap } from './subcommands/beatmap';
 import { recent } from './subcommands/recent';
 import { top } from './subcommands/top';
 
-const osu: CommandFn = async (command) => {
+const osu = async (command: CommandInteraction) => {
    await initializeCache(command);
 
    const subcommand = command.options.array()[0];

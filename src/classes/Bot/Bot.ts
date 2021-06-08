@@ -12,7 +12,7 @@ import { logger } from '../../client';
 import type { Module } from '../../modules/Module';
 import { extractCommandInfos } from '../../utils/commandInteraction';
 import { extractMessageInfos, sentByBotAdmin } from '../../utils/message';
-import { permissionWrapper } from '../../utils/permissions';
+import { permissionListenerWrapper, permissionWrapper } from '../../utils/permissions';
 
 export class Bot {
    private _client: Client;
@@ -84,13 +84,13 @@ export class Bot {
 
          if (module.ui) {
             for (const [id, fn] of Object.entries(module.ui)) {
-               this._onMessageComponent(id, fn);
+               this._onMessageComponent(id, permissionWrapper(fn, module));
             }
          }
 
          if (module.listeners) {
             for (const listener of module.listeners) {
-               this._onMessage(listener);
+               this._onMessage(permissionListenerWrapper(listener, module));
             }
          }
       } else {

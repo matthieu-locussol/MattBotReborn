@@ -1,17 +1,12 @@
-import {
-   ApplicationCommandData,
-   ClientEvents,
-   CommandInteraction,
-   Message,
-   MessageComponentInteraction,
-} from 'discord.js';
+import { ApplicationCommandData, ClientEvents, Interaction, Message, MessageComponentInteraction } from 'discord.js';
 import { StringMap } from 'i18next';
 import KeyvFile from 'keyv-file';
 import { resolve } from 'path';
-import Keyv = require('keyv');
 import { TranslationFunction } from '../locales';
+import Keyv = require('keyv');
 
-export type CommandFn = (command: CommandInteraction) => void;
+export type CommandFn = (command: Interaction) => void;
+export type MessageFn = (message: Message) => void;
 
 export interface Command extends ApplicationCommandData {
    fn: CommandFn;

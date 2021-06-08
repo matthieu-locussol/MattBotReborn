@@ -1,6 +1,7 @@
 import { Message, MessageActionRow } from 'discord.js';
+import { musicModule } from '.';
 import { logger } from '../../client';
-import { sentByBot } from '../../utils/message';
+import { extractMessageInfos, sentByBot } from '../../utils/message';
 import { pauseButton } from './ui/pauseButton';
 import { playButton } from './ui/playButton';
 import { stopButton } from './ui/stopButton';
@@ -10,6 +11,8 @@ import { volumeUpButton } from './ui/volumeUpButton';
 const YOUTUBE_REGEX = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?‌[\w?‌=]*)?/;
 
 export const youtubeLinkListener = (message: Message) => {
+   const t = musicModule.t;
+
    if (sentByBot(message)) {
       return;
    }
@@ -22,7 +25,12 @@ export const youtubeLinkListener = (message: Message) => {
 
    message.delete();
 
-   message.channel.send(message.content, {
+   const content = t('messageSentBy', message.guild.id, {
+      username: message.member.user.username,
+      link: message.content,
+   });
+
+   message.channel.send(content, {
       components: [
          new MessageActionRow({
             type: 'BUTTON',

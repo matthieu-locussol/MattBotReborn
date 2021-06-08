@@ -1,8 +1,9 @@
+import { CommandInteraction } from 'discord.js';
 import { buildTranslationFunction } from '../../locales';
 import { extractCommandInfos } from '../../utils/commandInteraction';
-import type { CommandFn, Module } from '../Module';
+import type { Module } from '../Module';
 
-const ping: CommandFn = async (command) => {
+const ping = async (command: CommandInteraction) => {
    const t = pingModule.t;
    const { guildId } = extractCommandInfos(command);
 

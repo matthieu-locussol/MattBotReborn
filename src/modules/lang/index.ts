@@ -1,10 +1,11 @@
+import { CommandInteraction } from 'discord.js';
 import { bot, logger } from '../../client';
 import { buildTranslationFunction } from '../../locales';
 import { extractCommandInfos } from '../../utils/commandInteraction';
 import { getStringOption } from '../../utils/commandInteractionOption';
-import type { CommandFn, Module } from '../Module';
+import type { Module } from '../Module';
 
-const lang: CommandFn = (command) => {
+const lang = (command: CommandInteraction) => {
    const t = langModule.t;
    const { guildId } = extractCommandInfos(command);
    const language = getStringOption(command.options, 'lang');
