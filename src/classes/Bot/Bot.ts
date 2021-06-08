@@ -13,7 +13,6 @@ import type { Module } from '../../modules/Module';
 import { extractCommandInfos } from '../../utils/commandInteraction';
 import { extractMessageInfos, sentByBotAdmin } from '../../utils/message';
 import { permissionListenerWrapper, permissionWrapper } from '../../utils/permissions';
-import { version } from '../../../package.json';
 
 export class Bot {
    private _client: Client;
@@ -33,7 +32,7 @@ export class Bot {
             status: 'online',
             activities: [
                {
-                  name: `v${version}`,
+                  name: `v1.0.1`,
                   type: 'PLAYING',
                   url: 'https://github.com/matthieu-locussol/MattBotReborn',
                },

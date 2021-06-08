@@ -13,15 +13,15 @@ export const playButton = () => {
 };
 
 export const handlePlay = async (interaction: MessageComponentInteraction) => {
+   const matches = interaction.message.content.match(YOUTUBE_REGEX);
+   const songUrl = matches[0];
+
    logger.log({
       id: 'LOG_Music_Play_Command',
       username: interaction.member.user.username,
       songUrl: interaction.message.content,
       guild: interaction.guild.name,
    });
-
-   const matches = interaction.message.content.match(YOUTUBE_REGEX);
-   const songUrl = matches[0];
 
    await play(interaction, songUrl);
 };
