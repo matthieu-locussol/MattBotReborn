@@ -1,6 +1,6 @@
 {
    "name": "mattbotreborn",
-   "version": "1.0.0",
+   "version": "1.0.1",
    "description": "A multipurpose Discord bot written using Typescript.",
    "repository": "https://github.com/matthieu-locussol/MattBotReborn",
    "author": "Matthieu Locussol",

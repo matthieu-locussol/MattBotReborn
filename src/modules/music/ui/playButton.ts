@@ -1,5 +1,6 @@
 import { MessageButton, MessageComponentInteraction } from 'discord.js';
 import { logger } from '../../../client';
+import { YOUTUBE_REGEX } from '../listeners';
 import { play } from '../subcommands/play';
 
 export const playButton = () => {
@@ -18,5 +19,9 @@ export const handlePlay = async (interaction: MessageComponentInteraction) => {
       songUrl: interaction.message.content,
       guild: interaction.guild.name,
    });
-   await play(interaction, interaction.message.content);
+
+   const matches = interaction.message.content.match(YOUTUBE_REGEX);
+   const songUrl = matches[0];
+
+   await play(interaction, songUrl);
 };

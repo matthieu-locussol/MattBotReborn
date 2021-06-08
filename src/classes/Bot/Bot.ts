@@ -13,6 +13,7 @@ import type { Module } from '../../modules/Module';
 import { extractCommandInfos } from '../../utils/commandInteraction';
 import { extractMessageInfos, sentByBotAdmin } from '../../utils/message';
 import { permissionListenerWrapper, permissionWrapper } from '../../utils/permissions';
+import { version } from '../../../package.json';
 
 export class Bot {
    private _client: Client;
@@ -27,6 +28,17 @@ export class Bot {
 
       this._client.on('ready', () => {
          logger.log({ id: 'LOG_Logged_In', tag: this._client.user.tag });
+
+         this._client.user.setPresence({
+            status: 'online',
+            activities: [
+               {
+                  name: `v${version}`,
+                  type: 'PLAYING',
+                  url: 'https://github.com/matthieu-locussol/MattBotReborn',
+               },
+            ],
+         });
       });
    }
 

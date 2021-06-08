@@ -8,7 +8,8 @@ import { stopButton } from './ui/stopButton';
 import { volumeDownButton } from './ui/volumeDownButton';
 import { volumeUpButton } from './ui/volumeUpButton';
 
-const YOUTUBE_REGEX = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?‌[\w?‌=]*)?/;
+export const YOUTUBE_REGEX =
+   /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-_]*)(&(amp;)?‌[\w?‌=]*)?/;
 
 export const youtubeLinkListener = (message: Message) => {
    const t = musicModule.t;
