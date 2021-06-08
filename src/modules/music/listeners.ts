@@ -1,7 +1,7 @@
 import { Message, MessageActionRow } from 'discord.js';
 import { musicModule } from '.';
 import { logger } from '../../client';
-import { extractMessageInfos, sentByBot } from '../../utils/message';
+import { sentByBot } from '../../utils/message';
 import { pauseButton } from './ui/pauseButton';
 import { playButton } from './ui/playButton';
 import { stopButton } from './ui/stopButton';
