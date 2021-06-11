@@ -21,16 +21,20 @@ export const dicesModule: Module = {
       options: [
          {
             name: 'type',
-            description: 'What kind of dice do yout want to roll? (default: classic)',
+            description: 'What kind of dice do yout want to roll? (default: d6)',
             type: 'STRING',
             choices: [
                {
-                  name: 'Classic dice (1 to 6)',
-                  value: 'classic',
+                  name: 'D6',
+                  value: 'd6',
                },
                {
-                  name: 'Board dice (1 to 12)',
-                  value: 'board',
+                  name: 'D12',
+                  value: 'd12',
+               },
+               {
+                  name: 'D20',
+                  value: 'd20',
                },
             ],
          },

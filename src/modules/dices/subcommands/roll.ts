@@ -3,19 +3,21 @@ import { Interaction, MessageAttachment } from 'discord.js';
 import mergeImages from 'merge-images';
 import { random, sum } from '../../../utils/utils';
 
-export type DICE_TYPE = 'classic' | 'board';
+export type DICE_TYPE = 'd6' | 'd12' | 'd20';
 
 const SIZES: Record<DICE_TYPE, number> = {
-   classic: 80,
-   board: 88,
+   d6: 80,
+   d12: 88,
+   d20: 820,
 };
 
 const VALUES: Record<DICE_TYPE, number> = {
-   classic: 6,
-   board: 12,
+   d6: 6,
+   d12: 12,
+   d20: 20,
 };
 
-export const roll = async (interaction: Interaction, type: DICE_TYPE = 'classic', count = 1) => {
+export const roll = async (interaction: Interaction, type: DICE_TYPE = 'd6', count = 1) => {
    const rolls: number[] = [];
 
    [...Array(count)].forEach(() => rolls.push(random(1, VALUES[type])));
@@ -35,7 +37,7 @@ export const roll = async (interaction: Interaction, type: DICE_TYPE = 'classic'
    const attachment = new MessageAttachment(Buffer.from(image.replace(/^data:image\/png;base64,/, ''), 'base64'));
 
    if (interaction.isCommand() || interaction.isMessageComponent()) {
-      interaction.reply(`Rolled ${count} ${type} dices: total of ${sum(rolls)}!`, {
+      interaction.reply(`Rolled ${count} ${type.toUpperCase()} dices: total of ${sum(rolls)}!`, {
          files: [attachment],
       });
    }
