@@ -96,14 +96,12 @@ const channelsPermissionListenerWrapper = (fn: MessageFn, module: Module) => {
 
       if (module.whitelist?.channels?.length > 0) {
          if (!module.whitelist.channels.includes(channel)) {
-            logger.warn({ id: 'LOG_Whitelist_Channel', channel, moduleName: module.name });
             return;
          }
       }
 
       if (module.blacklist?.channels?.length > 0) {
          if (module.blacklist.channels.includes(channel)) {
-            logger.warn({ id: 'LOG_Blacklist_Channel', channel, moduleName: module.name });
             return;
          }
       }
@@ -114,18 +112,16 @@ const channelsPermissionListenerWrapper = (fn: MessageFn, module: Module) => {
 
 const usersPermissionListenerWrapper = (fn: MessageFn, module: Module) => {
    return (message: Message) => {
-      const { user, userId } = extractMessageInfos(message);
+      const { userId } = extractMessageInfos(message);
 
       if (module.whitelist?.users?.length > 0) {
          if (!module.whitelist.users.includes(userId)) {
-            logger.warn({ id: 'LOG_Whitelist_User', user, userId, moduleName: module.name });
             return;
          }
       }
 
       if (module.blacklist?.users?.length > 0) {
          if (module.blacklist.users.includes(userId)) {
-            logger.warn({ id: 'LOG_Blacklist_User', user, userId, moduleName: module.name });
             return;
          }
       }

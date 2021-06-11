@@ -49,6 +49,17 @@ export const toUpperFirst = (value: string) => {
    return `${head}${tail}`;
 };
 
+export const sum = (array: number[]) => {
+   return array.reduce((p, c) => p + c, 0);
+};
+
 export const average = (array: number[]) => {
    return array.reduce((p, c) => p + c, 0) / array.length;
+};
+
+export const random = (min: number, max: number) => {
+   min = Math.ceil(min);
+   max = Math.floor(max);
+
+   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
