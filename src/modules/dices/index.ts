@@ -40,7 +40,7 @@ export const dicesModule: Module = {
          },
          {
             name: 'count',
-            description: 'How many dices do you want to roll? (defaut: 1)',
+            description: 'How many dices do you want to roll? (default: 1)',
             type: 'INTEGER',
          },
       ],
