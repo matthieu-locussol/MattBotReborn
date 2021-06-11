@@ -8,7 +8,7 @@ export type DICE_TYPE = 'd6' | 'd12' | 'd20';
 const SIZES: Record<DICE_TYPE, number> = {
    d6: 80,
    d12: 88,
-   d20: 820,
+   d20: 82,
 };
 
 const VALUES: Record<DICE_TYPE, number> = {
