@@ -34,7 +34,7 @@
       "keyv-file": "0.2.0",
       "libsodium-wrappers": "^0.7.9",
       "merge-images": "^2.0.0",
-      "moment": "2.29.1",
+      "moment": "2.29.2",
       "node-osu": "2.2.1",
       "ojsama": "2.2.0",
       "utf-8-validate": "^5.0.5",
