@@ -19,7 +19,7 @@
       "check:prettier"
    ],
    "dependencies": {
-      "@discordjs/opus": "0.5.3",
+      "@discordjs/opus": "0.8.0",
       "axios": "0.21.1",
       "bufferutil": "^4.0.3",
       "canvas": "^2.8.0",
